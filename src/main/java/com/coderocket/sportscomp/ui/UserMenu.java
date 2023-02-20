@@ -1,20 +1,17 @@
 package com.coderocket.sportscomp.ui;
 
 import com.coderocket.sportscomp.ui.action.MenuAction;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
+@Component
+@RequiredArgsConstructor
 public class UserMenu {
     private final UserInput userInput;
-    private final List<MenuAction> actions;
-
-    public UserMenu(UserInput userInput, List<MenuAction> actions) {
-        this.userInput = userInput;
-        this.actions = actions;
-    }
+    private final List<MenuAction> userReadMenuActions;
 
     public void startMenu() {
         int menuActionChoiceFromUser;
@@ -25,30 +22,29 @@ public class UserMenu {
 
             try {
                 menuActionChoiceFromUser = userInput.getActionChoice();
-                // TODO: separate validation class { UserInputValidation }
                 validateUserActionChoice(menuActionChoiceFromUser, 0);
-
                 executeMenuAction(menuActionChoiceFromUser);
-
             } catch(IllegalArgumentException | InputMismatchException e) {
                 System.err.println("Invalid menu action choice.");
                 System.err.println("Please try again!");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
 
     private void executeMenuAction(int index) {
-        actions.get(index).execute();
+        userReadMenuActions.get(index).execute();
     }
 
     private void printAllActions() {
-        for (int i = 0; i < actions.size(); i++) {
-            System.out.println(i + ". " + actions.get(i).getName());
+        for (int i = 0; i < userReadMenuActions.size(); i++) {
+            System.out.println(i + ". " + userReadMenuActions.get(i).getName());
         }
     }
 
     private void validateUserActionChoice(int choice, int startIndex) {
-        if(choice < 0 || choice >= this.actions.size()) {
+        if(choice < 0 || choice >= this.userReadMenuActions.size()) {
             throw new IllegalArgumentException("Action choice invalid");
         }
     }

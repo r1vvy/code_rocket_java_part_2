@@ -1,13 +1,11 @@
-package com.coderocket.sportscomp.domain;
+package com.coderocket.sportscomp.database;
 
-import lombok.Builder;
 import lombok.Value;
 
 import java.time.LocalDate;
 
 @Value
-@Builder
-public class Competition {
+public class CompetitionEntity {
     Integer id;
     String title;
     Integer maxCapacity;
