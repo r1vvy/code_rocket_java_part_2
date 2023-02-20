@@ -34,7 +34,7 @@ public class ReadAllCompetitionsAction implements MenuAction{
             System.out.println(i + ". " + competitions.get(i));
         }
     }
-
+    // TODO: Add this as validation "AnyObjectExistenceValidation" to reuse for ViewAllPlayersAction.
     private static void validateAnyCompetitionExistence(ArrayList<Competition> competitions) {
         if(competitions.isEmpty()) {
             throw new NoElementFoundException("No competition found");
