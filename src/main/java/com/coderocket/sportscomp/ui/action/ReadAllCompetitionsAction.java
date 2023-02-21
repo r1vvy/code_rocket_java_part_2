@@ -21,12 +21,7 @@ public class ReadAllCompetitionsAction implements MenuAction{
     @Override
     public void execute() {
         var competitions = competitionService.getAllCompetitionsAsArrayList();
-        try {
-            validateAnyCompetitionExistence(competitions);
-            printAllCompetitions(competitions);
-        } catch(NoElementFoundException e) {
-            System.err.println(e.getMessage());
-        }
+        printAllCompetitions(competitions);
     }
 
     private static void printAllCompetitions(ArrayList<Competition> competitions) {
