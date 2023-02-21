@@ -2,6 +2,7 @@ package com.coderocket.sportscomp.core;
 
 import com.coderocket.sportscomp.database.CompetitionRepository;
 import com.coderocket.sportscomp.domain.Competition;
+import com.coderocket.sportscomp.exceptions.NoElementFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,5 +22,10 @@ public class CompetitionService {
         return competitionRepository
                 .getAllCompetitions()
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public Competition getCompetitionById(Integer id) {
+        return competitionRepository.findCompetitionByCompetitionId(id)
+                .orElseThrow(() -> new NoElementFoundException("No Competition object found with supplied id"));
     }
 }

@@ -1,5 +1,6 @@
 package com.coderocket.sportscomp.ui;
 
+import com.coderocket.sportscomp.dto.ReadCompetitionByIdInRequest;
 import com.coderocket.sportscomp.dto.CreateCompetitionInRequest;
 import com.coderocket.sportscomp.dto.CreatePlayerInRequest;
 import com.coderocket.sportscomp.utils.DateTimeUtils;
@@ -56,5 +57,14 @@ public class UserInput {
                 DateTimeUtils.formatStringAsLocalDate(startDate),
                 DateTimeUtils.formatStringAsLocalDate(endDate)
         );
+    }
+
+    public ReadCompetitionByIdInRequest getReadCompetitionByIdRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID: ");
+        Integer id = Integer.valueOf(scanner.nextInt());
+
+        return new ReadCompetitionByIdInRequest(id);
     }
 }

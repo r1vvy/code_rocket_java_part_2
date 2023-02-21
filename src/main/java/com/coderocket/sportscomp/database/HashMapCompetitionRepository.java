@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Component
@@ -27,6 +28,12 @@ public class HashMapCompetitionRepository implements CompetitionRepository{
     public Stream<Competition> getAllCompetitions() {
         return repo.values()
                 .stream()
+                .map(entityToDomainCoverter::convert);
+    }
+
+    @Override
+    public Optional<Competition> findCompetitionByCompetitionId(Integer id) {
+        return Optional.ofNullable(repo.get(id))
                 .map(entityToDomainCoverter::convert);
     }
 }
