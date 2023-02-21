@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 public class PlayerService {
     private final PlayerRepository playerRepository;
 
-    // TODO
+    public void createPlayer(Player player) {
+        playerRepository.save(player);
+    }
+
     public ArrayList<Player> getAllPlayersAsArrayList() {
         return playerRepository
                 .getAllPlayers()

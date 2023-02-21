@@ -5,12 +5,12 @@ import com.coderocket.sportscomp.domain.Competition;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CompetitionEntityToCompetitionDomainCoverter {
+public class CompetitionEntityToCompetitionDomainConverter {
 
     public Competition convert(CompetitionEntity entity) {
         return Competition.builder()
                 .title(entity.getTitle())
-                .maxCapacity(entity.getMaxCapacity())
+                .capacity(entity.getCapacity())
                 .registrationOpen(entity.getRegistrationOpen())
                 .registrationClose(entity.getRegistrationClose())
                 .startDate(entity.getStartDate())

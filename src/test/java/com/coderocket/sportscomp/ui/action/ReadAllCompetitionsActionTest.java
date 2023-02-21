@@ -49,7 +49,7 @@ class ReadAllCompetitionsActionTest {
     private Competition competition() {
         return Competition.builder()
                 .title("Test")
-                .maxCapacity(20)
+                .capacity(20)
                 .registrationOpen(LocalDate.now())
                 .registrationClose(LocalDate.now())
                 .startDate(LocalDate.now())

@@ -10,7 +10,7 @@ public class CompetitionDomainToCompetitionEntityConverter {
         return new CompetitionEntity(
                 id,
                 competition.getTitle(),
-                competition.getMaxCapacity(),
+                competition.getCapacity(),
                 competition.getRegistrationOpen(),
                 competition.getRegistrationClose(),
                 competition.getStartDate(),

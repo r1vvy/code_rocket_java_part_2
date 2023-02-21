@@ -1,7 +1,7 @@
 package com.coderocket.sportscomp.database;
 
 import com.coderocket.sportscomp.database.converter.CompetitionDomainToCompetitionEntityConverter;
-import com.coderocket.sportscomp.database.converter.CompetitionEntityToCompetitionDomainCoverter;
+import com.coderocket.sportscomp.database.converter.CompetitionEntityToCompetitionDomainConverter;
 import com.coderocket.sportscomp.domain.Competition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class HashMapCompetitionRepository implements CompetitionRepository{
     private static Integer COMP_SEQUENCE = 1;
     private Map<Integer, CompetitionEntity>  repo = new HashMap<>();
     private final CompetitionDomainToCompetitionEntityConverter domainToEntityConverter;
-    private final CompetitionEntityToCompetitionDomainCoverter entityToDomainCoverter;
+    private final CompetitionEntityToCompetitionDomainConverter entityToDomainCoverter;
     @Override
     public void save(Competition competition) {
         CompetitionEntity entity = domainToEntityConverter.convert(competition, ++COMP_SEQUENCE);
