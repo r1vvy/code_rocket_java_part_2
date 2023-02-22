@@ -12,4 +12,7 @@ public class AppConfig {
     public List<MenuAction> userReadMenuActions() {
         return List.of();
     }
+
+    @Bean("adminReadWriteActions")
+    public List<MenuAction> adminReadWriteActions() { return List.of(); }
 }

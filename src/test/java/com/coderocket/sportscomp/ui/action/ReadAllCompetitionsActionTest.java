@@ -35,14 +35,14 @@ class ReadAllCompetitionsActionTest {
         ArrayList<Competition> competitions = new ArrayList<>();
         competitions.add(competition());
         competitions.add(competition());
-        when(competitionService.getAllCompetitionsAsArrayList()).thenReturn(competitions);
+        when(competitionService.getAllCompetitions()).thenReturn(competitions);
 
         // act
         ReadAllCompetitionsAction victim = new ReadAllCompetitionsAction(competitionService);
         victim.execute();
 
         // assert
-        verify(competitionService, times(1)).getAllCompetitionsAsArrayList();
+        verify(competitionService, times(1)).getAllCompetitions();
     }
 
 

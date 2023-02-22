@@ -1,7 +1,6 @@
 package com.coderocket.sportscomp.ui;
 
 import com.coderocket.sportscomp.ui.action.MenuAction;
-import com.coderocket.sportscomp.ui.action.MenuActionWithSubActions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -27,27 +26,10 @@ public class UserMenu {
 
                 menuActionChoiceFromUser = userReadMenuActions.get(userActionChoice);
                 menuActionChoiceFromUser.execute();
-
-                // TODO: Refactor, Unit test and manual test this block!
-                if(menuActionChoiceFromUser instanceof MenuActionWithSubActions) {
-                    MenuActionWithSubActions menuActionWithSubActions = (MenuActionWithSubActions) menuActionChoiceFromUser;
-                    if (!menuActionWithSubActions.getSubActions().isEmpty()) {
-                        List<MenuAction> subActions = menuActionWithSubActions.getSubActions();
-                        printAllActions(subActions);
-
-                        MenuAction subActionChoiceFromUser;
-
-                        int userSubActionChoice = userInput.getActionChoice();
-                        validateUserActionChoice(userSubActionChoice, 0);
-
-                        subActionChoiceFromUser = menuActionWithSubActions.getSubActions().get(userSubActionChoice);
-                        subActionChoiceFromUser.execute();
-                    }
-                }
-
             } catch(IllegalArgumentException | InputMismatchException e) {
                 System.err.println("Invalid menu action choice.");
                 System.err.println("Please try again!");
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }

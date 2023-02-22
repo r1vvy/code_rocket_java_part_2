@@ -34,12 +34,12 @@ class ReadAllPlayersActionTest {
         players.add(player());
         players.add(player());
 
-        when(playerService.getAllPlayersAsArrayList()).thenReturn(players);
+        when(playerService.getAllPlayers()).thenReturn(players);
 
         ReadAllPlayersAction victim = new ReadAllPlayersAction(playerService);
         victim.execute();
 
-        verify(playerService, times(1)).getAllPlayersAsArrayList();
+        verify(playerService, times(1)).getAllPlayers();
     }
 
     private Player player() {

@@ -1,8 +1,8 @@
 package com.coderocket.sportscomp.ui;
 
-import com.coderocket.sportscomp.dto.ReadCompetitionByIdInRequest;
 import com.coderocket.sportscomp.dto.CreateCompetitionInRequest;
 import com.coderocket.sportscomp.dto.CreatePlayerInRequest;
+import com.coderocket.sportscomp.dto.ReadCompetitionByIdInRequest;
 import com.coderocket.sportscomp.utils.DateTimeUtils;
 import org.springframework.stereotype.Component;
 

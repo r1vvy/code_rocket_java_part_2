@@ -2,11 +2,11 @@ package com.coderocket.sportscomp.database;
 
 import com.coderocket.sportscomp.domain.Player;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 public interface PlayerRepository {
 
     void save(Player player);
 
-    Stream<Player> getAllPlayers();
+    List<Player> findAllPlayers();
 }

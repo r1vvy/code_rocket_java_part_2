@@ -7,7 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlayerDomainToPlayerEntityConverter {
 
-    public PlayerEntity convert(Player player, Integer id) {
-        return new PlayerEntity(id, player.getName(), player.getSurname(), player.getRating());
+    public PlayerEntity convert(Player player) {
+        return PlayerEntity.builder()
+                .name(player.getName())
+                .surname(player.getSurname())
+                .rating(player.getRating())
+                .build();
     }
 }

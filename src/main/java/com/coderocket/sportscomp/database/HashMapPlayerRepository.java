@@ -4,13 +4,12 @@ import com.coderocket.sportscomp.database.converter.PlayerDomainToPlayerEntityCo
 import com.coderocket.sportscomp.database.converter.PlayerEntityToPlayerDomainConverter;
 import com.coderocket.sportscomp.domain.Player;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
-@Component
 @RequiredArgsConstructor
 public class HashMapPlayerRepository implements PlayerRepository {
     private static Integer PLAYER_SEQUENCE = 1;
@@ -21,14 +20,16 @@ public class HashMapPlayerRepository implements PlayerRepository {
 
     @Override
     public void save(Player player) {
-        PlayerEntity entity = domainToEntityConverter.convert(player, ++PLAYER_SEQUENCE);
+        PlayerEntity entity = domainToEntityConverter.convert(player);
+        entity.setId(PLAYER_SEQUENCE++);
         repo.put(entity.getId(), entity);
     }
 
     @Override
-    public Stream<Player> getAllPlayers() {
+    public List<Player> findAllPlayers() {
         return repo.values()
                 .stream()
-                .map(entityToDomainConverter::convert);
+                .map(entityToDomainConverter::convert)
+                .collect(Collectors.toList());
     }
 }

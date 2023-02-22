@@ -2,11 +2,10 @@ package com.coderocket.sportscomp.ui.action;
 
 import com.coderocket.sportscomp.core.CompetitionService;
 import com.coderocket.sportscomp.domain.Competition;
-import com.coderocket.sportscomp.exceptions.NoElementFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -20,19 +19,11 @@ public class ReadAllCompetitionsAction implements MenuAction{
 
     @Override
     public void execute() {
-        var competitions = competitionService.getAllCompetitionsAsArrayList();
+        var competitions = competitionService.getAllCompetitions();
         printAllCompetitions(competitions);
     }
 
-    private static void printAllCompetitions(ArrayList<Competition> competitions) {
-        for (int i = 0; i < competitions.size(); i++) {
-            System.out.println(i + ". " + competitions.get(i));
-        }
-    }
-    // TODO: Add this as validation "AnyObjectExistenceValidation" to reuse for ViewAllPlayersAction.
-    private static void validateAnyCompetitionExistence(ArrayList<Competition> competitions) {
-        if(competitions.isEmpty()) {
-            throw new NoElementFoundException("No competition found");
-        }
+    private static void printAllCompetitions(List<Competition> competitions) {
+        competitions.forEach(competition -> System.out.println(competition));
     }
 }

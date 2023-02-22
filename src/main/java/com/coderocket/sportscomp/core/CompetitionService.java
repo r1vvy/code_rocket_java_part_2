@@ -6,8 +6,7 @@ import com.coderocket.sportscomp.exceptions.NoElementFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -18,14 +17,12 @@ public class CompetitionService {
         competitionRepository.save(competition);
     }
 
-    public ArrayList<Competition> getAllCompetitionsAsArrayList() {
-        return competitionRepository
-                .getAllCompetitions()
-                .collect(Collectors.toCollection(ArrayList::new));
+    public List<Competition> getAllCompetitions() {
+        return competitionRepository.findAllCompetitions();
     }
 
     public Competition getCompetitionById(Integer id) {
         return competitionRepository.findCompetitionByCompetitionId(id)
-                .orElseThrow(() -> new NoElementFoundException("No Competition object found with supplied id"));
+                .orElseThrow(() -> new NoElementFoundException("No Competition object found with id=" + id));
     }
 }

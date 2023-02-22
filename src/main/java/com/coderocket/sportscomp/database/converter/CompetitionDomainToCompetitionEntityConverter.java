@@ -6,15 +6,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CompetitionDomainToCompetitionEntityConverter {
-    public CompetitionEntity convert(Competition competition, Integer id) {
-        return new CompetitionEntity(
-                id,
-                competition.getTitle(),
-                competition.getCapacity(),
-                competition.getRegistrationOpen(),
-                competition.getRegistrationClose(),
-                competition.getStartDate(),
-                competition.getEndDate()
-        );
+    public CompetitionEntity convert(Competition competition) {
+        return CompetitionEntity.builder()
+                .title(competition.getTitle())
+                .capacity(competition.getCapacity())
+                .registrationOpen(competition.getRegistrationOpen())
+                .registrationClose(competition.getRegistrationClose())
+                .startDate(competition.getStartDate())
+                .endDate(competition.getEndDate())
+                .build();
     }
 }

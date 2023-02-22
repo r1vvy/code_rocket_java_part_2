@@ -20,14 +20,12 @@ public class ReadAllPlayersAction implements MenuAction {
 
     @Override
     public void execute() {
-        var players = playerService.getAllPlayersAsArrayList();
+        var players = playerService.getAllPlayers();
         // TODO: Add validation
         printAllPlayers(players);
     }
 
     private static void printAllPlayers(List<Player> players) {
-        for (int i = 0; i < players.size(); i++) {
-            System.out.println(i + ". " + players.get(i));
-        }
+        players.forEach(player -> System.out.println(player));
     }
 }

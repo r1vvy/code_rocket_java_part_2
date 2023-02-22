@@ -4,36 +4,37 @@ import com.coderocket.sportscomp.database.converter.CompetitionDomainToCompetiti
 import com.coderocket.sportscomp.database.converter.CompetitionEntityToCompetitionDomainConverter;
 import com.coderocket.sportscomp.domain.Competition;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
-@Component
 @RequiredArgsConstructor
 public class HashMapCompetitionRepository implements CompetitionRepository{
     private static Integer COMP_SEQUENCE = 1;
     private Map<Integer, CompetitionEntity>  repo = new HashMap<>();
     private final CompetitionDomainToCompetitionEntityConverter domainToEntityConverter;
-    private final CompetitionEntityToCompetitionDomainConverter entityToDomainCoverter;
+    private final CompetitionEntityToCompetitionDomainConverter entityToDomainConverter;
     @Override
     public void save(Competition competition) {
-        CompetitionEntity entity = domainToEntityConverter.convert(competition, ++COMP_SEQUENCE);
+        CompetitionEntity entity = domainToEntityConverter.convert(competition);
+        entity.setId(COMP_SEQUENCE++);
         repo.put(entity.getId(), entity);
     }
 
     @Override
-    public Stream<Competition> getAllCompetitions() {
+    public List<Competition> findAllCompetitions() {
         return repo.values()
                 .stream()
-                .map(entityToDomainCoverter::convert);
+                .map(entityToDomainConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Competition> findCompetitionByCompetitionId(Integer id) {
         return Optional.ofNullable(repo.get(id))
-                .map(entityToDomainCoverter::convert);
+                .map(entityToDomainConverter::convert);
     }
 }
