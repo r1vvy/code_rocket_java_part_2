@@ -52,10 +52,9 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
             session.close();
         }
     }
-
-
+    // TODO
     @Override
-    public Optional<Competition> findCompetitionByCompetitionId(Integer id) {
+    public Optional<Competition> findById(Integer id) {
         return Optional.empty();
     }
 }

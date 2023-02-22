@@ -11,5 +11,6 @@ public interface CompetitionRepository {
 
     List<Competition> findAllCompetitions();
 
-    Optional<Competition> findCompetitionByCompetitionId(Integer id);
+    // TODO
+    Optional<Competition> findById(Integer id);
 }

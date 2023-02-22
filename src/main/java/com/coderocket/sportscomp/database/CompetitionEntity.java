@@ -1,9 +1,14 @@
 package com.coderocket.sportscomp.database;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -27,4 +32,10 @@ public class CompetitionEntity {
     LocalDate startDate;
     @Column(name = "end_date")
     LocalDate endDate;
+
+    @JoinTable(
+            name = "competition_player",
+            joinColumns = @JoinColumn(name = "competition_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id"))
+    Set<PlayerEntity> players = new HashSet<>();
 }

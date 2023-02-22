@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @Builder
 @Entity
@@ -20,5 +23,6 @@ public class PlayerEntity {
     String surname;
     Integer rating;
 
-
+    @ManyToMany(mappedBy = "players")
+    Set<CompetitionEntity> competitions = new HashSet<>();
 }

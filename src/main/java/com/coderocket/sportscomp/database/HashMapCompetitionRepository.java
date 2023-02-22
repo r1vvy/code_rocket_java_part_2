@@ -33,7 +33,7 @@ public class HashMapCompetitionRepository implements CompetitionRepository{
     }
 
     @Override
-    public Optional<Competition> findCompetitionByCompetitionId(Integer id) {
+    public Optional<Competition> findById(Integer id) {
         return Optional.ofNullable(repo.get(id))
                 .map(entityToDomainConverter::convert);
     }

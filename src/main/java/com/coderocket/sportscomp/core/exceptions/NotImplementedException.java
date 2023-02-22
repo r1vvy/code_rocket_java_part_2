@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.exceptions;
+package com.coderocket.sportscomp.core.exceptions;
 
 public class NotImplementedException extends RuntimeException{
     public NotImplementedException(String message) {
