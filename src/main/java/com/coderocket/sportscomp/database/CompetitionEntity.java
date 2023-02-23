@@ -33,9 +33,6 @@ public class CompetitionEntity {
     @Column(name = "end_date")
     LocalDate endDate;
 
-    @JoinTable(
-            name = "competition_player",
-            joinColumns = @JoinColumn(name = "competition_id"),
-            inverseJoinColumns = @JoinColumn(name = "player_id"))
-    Set<PlayerEntity> players = new HashSet<>();
+    @OneToMany(mappedBy = "competitionEntity")
+    Set<CompetitionPlayerEntity> players = new HashSet<>();
 }

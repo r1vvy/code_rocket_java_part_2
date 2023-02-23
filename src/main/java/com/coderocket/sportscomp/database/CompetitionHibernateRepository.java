@@ -34,27 +34,42 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
     }
 
     @Override
+    public void delete(Competition competition) {
+        var entity = domainToEntityConverter.convert(competition);
+        //sessionFactory.getCurrentSession().find(CompetitionEntity.class, );
+
+        sessionFactory.getCurrentSession().remove(entity);
+    }
+
+    @Override
     public List<Competition> findAllCompetitions() {
-        Session session = sessionFactory.openSession();
-        try {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<CompetitionEntity> query = builder.createQuery(CompetitionEntity.class);
+        Session session = sessionFactory.getCurrentSession();
 
-            Root<CompetitionEntity> root = query.from(CompetitionEntity.class);
-            query.select(root);
-            Query<CompetitionEntity> q = session.createQuery(query);
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CompetitionEntity> criteriaQuery = builder.createQuery(CompetitionEntity.class);
 
-            return q.getResultList()
-                    .stream()
-                    .map(entityToDomainConverter::convert)
-                    .collect(Collectors.toList());
-        } finally {
-            session.close();
-        }
+        Root<CompetitionEntity> root = criteriaQuery.from(CompetitionEntity.class);
+        criteriaQuery.select(root);
+        Query<CompetitionEntity> sessionQuery = session.createQuery(criteriaQuery);
+
+        return sessionQuery.getResultList()
+                .stream()
+                .map(entityToDomainConverter::convert)
+                .collect(Collectors.toList());
     }
     // TODO
     @Override
     public Optional<Competition> findById(Integer id) {
-        return Optional.empty();
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<CompetitionEntity> criteriaQuery = builder.createQuery(CompetitionEntity.class);
+
+        Root<CompetitionEntity> root = criteriaQuery.from(CompetitionEntity.class);
+        criteriaQuery.select(root).where(builder.equal(root.get("id"), id));
+
+        Query<CompetitionEntity> sessionQuery = session.createQuery(criteriaQuery);
+
+        return sessionQuery.uniqueResultOptional().map(entityToDomainConverter::convert);
     }
 }

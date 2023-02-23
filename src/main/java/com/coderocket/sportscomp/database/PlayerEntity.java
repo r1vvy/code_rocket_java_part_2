@@ -19,10 +19,13 @@ public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+    @Column(name = "name")
     String name;
+    @Column(name = "surname")
     String surname;
+    @Column(name = "rating")
     Integer rating;
 
-    @ManyToMany(mappedBy = "players")
-    Set<CompetitionEntity> competitions = new HashSet<>();
+    @OneToMany(mappedBy = "playerEntity")
+    Set<CompetitionPlayerEntity> competitions = new HashSet<>();
 }

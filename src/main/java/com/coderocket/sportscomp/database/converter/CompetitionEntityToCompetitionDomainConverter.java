@@ -15,6 +15,7 @@ public class CompetitionEntityToCompetitionDomainConverter {
                 .registrationClose(entity.getRegistrationClose())
                 .startDate(entity.getStartDate())
                 .endDate(entity.getEndDate())
+                .id(entity.getId())
                 .build();
     }
 }

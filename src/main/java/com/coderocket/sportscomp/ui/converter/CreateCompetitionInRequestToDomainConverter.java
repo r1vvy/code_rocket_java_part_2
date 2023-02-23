@@ -2,12 +2,10 @@ package com.coderocket.sportscomp.ui.converter;
 
 import com.coderocket.sportscomp.domain.Competition;
 import com.coderocket.sportscomp.dto.CreateCompetitionInRequest;
-import com.coderocket.sportscomp.utils.DateTimeUtils;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CreateCompetitionInRequestToDomainConverter {
-    private DateTimeUtils dateTimeUtils = new DateTimeUtils();
     public Competition convert(CreateCompetitionInRequest request) {
         return Competition.builder()
                 .title(request.getTitle())

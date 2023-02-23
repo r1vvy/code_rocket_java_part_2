@@ -9,6 +9,8 @@ public interface CompetitionRepository {
 
     void save(Competition competition);
 
+    void delete(Competition competition);
+
     List<Competition> findAllCompetitions();
 
     // TODO

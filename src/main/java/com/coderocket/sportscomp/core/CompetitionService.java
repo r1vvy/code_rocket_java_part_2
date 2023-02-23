@@ -24,8 +24,12 @@ public class CompetitionService {
         }
     }
 
+    public void deleteCompetition(Competition competition) {
+        competitionRepository.delete(competition);
+    }
+
     public Competition getCompetitionById(Integer id) {
         return competitionRepository.findById(id)
-                .orElseThrow(() -> new NoEntityFoundException("No Competition object found with id=" + id));
+                .orElseThrow(() -> new NoEntityFoundException("No Competition object found with id =" + id));
     }
 }

@@ -1,7 +1,9 @@
 package com.coderocket.sportscomp.ui;
 
+import com.coderocket.sportscomp.domain.holder.ChosenCompetitionHolder;
 import com.coderocket.sportscomp.dto.CreateCompetitionInRequest;
 import com.coderocket.sportscomp.dto.CreatePlayerInRequest;
+import com.coderocket.sportscomp.dto.DeleteCompetitionInActionRequest;
 import com.coderocket.sportscomp.dto.ReadCompetitionByIdInRequest;
 import com.coderocket.sportscomp.utils.DateTimeUtils;
 import org.springframework.stereotype.Component;
@@ -66,5 +68,18 @@ public class UserInput {
         Integer id = Integer.valueOf(scanner.nextInt());
 
         return new ReadCompetitionByIdInRequest(id);
+    }
+
+    public DeleteCompetitionInActionRequest getDeleteCompetitionRequest() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Are you sure you wish to continue? [Y/N]");
+        String userChoice = scanner.nextLine();
+        if(userChoice.equalsIgnoreCase("Y")) {
+            return new DeleteCompetitionInActionRequest(ChosenCompetitionHolder.getChosenCompetition());
+        } else if(userChoice.equalsIgnoreCase("N")){
+            return null;
+        } else {
+            throw new IllegalArgumentException("Invalid input");
+        }
     }
 }
