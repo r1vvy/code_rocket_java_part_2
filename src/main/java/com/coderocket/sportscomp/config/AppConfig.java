@@ -1,5 +1,7 @@
 package com.coderocket.sportscomp.config;
 
+import com.coderocket.sportscomp.dto.CompetitionContextHolder;
+import com.coderocket.sportscomp.dto.ThreadLocalCompetitionContextHolder;
 import com.coderocket.sportscomp.ui.action.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,5 +39,10 @@ public class AppConfig {
         return List.of(
                 deleteCompetitionAction
         );
+    }
+
+    @Bean("competitionContextHolder")
+    public CompetitionContextHolder competitionContextHolder() {
+        return new ThreadLocalCompetitionContextHolder();
     }
 }

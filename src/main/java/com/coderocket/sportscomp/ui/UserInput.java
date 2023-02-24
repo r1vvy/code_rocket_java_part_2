@@ -1,17 +1,20 @@
 package com.coderocket.sportscomp.ui;
 
-import com.coderocket.sportscomp.domain.holder.ChosenCompetitionHolder;
-import com.coderocket.sportscomp.dto.CreateCompetitionInRequest;
-import com.coderocket.sportscomp.dto.CreatePlayerInRequest;
-import com.coderocket.sportscomp.dto.DeleteCompetitionInActionRequest;
-import com.coderocket.sportscomp.dto.ReadCompetitionByIdInRequest;
+import com.coderocket.sportscomp.dto.*;
 import com.coderocket.sportscomp.utils.DateTimeUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
 public class UserInput {
+
+    // TODO: separate this;
+    @Autowired
+    @Qualifier("competitionContextHolder")
+    private CompetitionContextHolder competitionContextHolder;
 
     public int getActionChoice() {
         Scanner scanner = new Scanner(System.in);
@@ -61,23 +64,27 @@ public class UserInput {
         );
     }
 
-    public ReadCompetitionByIdInRequest getReadCompetitionByIdRequest() {
+    public ReadCompetitionByIdRequest getReadCompetitionByIdRequest() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter the ID: ");
         Integer id = Integer.valueOf(scanner.nextInt());
 
-        return new ReadCompetitionByIdInRequest(id);
+        return new ReadCompetitionByIdRequest(id);
     }
 
-    public DeleteCompetitionInActionRequest getDeleteCompetitionRequest() {
+    public DeleteCompetitionRequest getDeleteCompetitionRequest() {
         System.out.println("Are you sure you wish to continue? [Y/N]");
 
         Scanner scanner = new Scanner(System.in);
         String userChoice = scanner.nextLine();
 
         if(userChoice.equalsIgnoreCase("Y")) {
-            return new DeleteCompetitionInActionRequest(ChosenCompetitionHolder.getChosenCompetition());
+            DeleteCompetitionRequest request = new DeleteCompetitionRequest();
+
+            request.setCompetition(competitionContextHolder.getChosenCompetition());
+
+            return request;
         } else if(userChoice.equalsIgnoreCase("N")){
             // TODO create interface Request Handler that handles wether the request should be cancelled or not.
             // TODO create DeleteCompetitionHandler that handles the request.

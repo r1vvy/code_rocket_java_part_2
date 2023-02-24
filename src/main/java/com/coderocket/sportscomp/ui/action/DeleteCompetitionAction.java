@@ -1,9 +1,11 @@
 package com.coderocket.sportscomp.ui.action;
 
 import com.coderocket.sportscomp.core.CompetitionService;
-import com.coderocket.sportscomp.domain.holder.ChosenCompetitionHolder;
+import com.coderocket.sportscomp.dto.CompetitionContextHolder;
 import com.coderocket.sportscomp.ui.UserInput;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,6 +13,10 @@ import org.springframework.stereotype.Component;
 public class DeleteCompetitionAction implements MenuAction{
     private final UserInput userInput;
     private final CompetitionService competitionService;
+
+    @Autowired()
+    @Qualifier("competitionContextHolder")
+    private final CompetitionContextHolder contextHolder;
 
     @Override
     public String getName() {
@@ -22,6 +28,7 @@ public class DeleteCompetitionAction implements MenuAction{
         var request = userInput.getDeleteCompetitionRequest();
 
         competitionService.deleteCompetition(request.getCompetition());
-        ChosenCompetitionHolder.clearChosenCompetition();
+
+        contextHolder.clearChosenCompetition();
     }
 }

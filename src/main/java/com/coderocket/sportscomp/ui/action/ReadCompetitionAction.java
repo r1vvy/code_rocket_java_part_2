@@ -1,7 +1,7 @@
 package com.coderocket.sportscomp.ui.action;
 
 import com.coderocket.sportscomp.core.CompetitionService;
-import com.coderocket.sportscomp.domain.holder.ChosenCompetitionHolder;
+import com.coderocket.sportscomp.dto.CompetitionContextHolder;
 import com.coderocket.sportscomp.ui.UserInput;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,10 @@ import java.util.List;
 public class ReadCompetitionAction implements MenuActionWithSubActions {
     private final UserInput userInput;
     private final CompetitionService competitionService;
+
+    @Autowired()
+    @Qualifier("competitionContextHolder")
+    private final CompetitionContextHolder contextHolder;
 
     @Autowired
     @Qualifier("competitionSubActions")
@@ -35,7 +39,9 @@ public class ReadCompetitionAction implements MenuActionWithSubActions {
     public void execute() {
         var request = userInput.getReadCompetitionByIdRequest();
         var competition = competitionService.getCompetitionById(request.getId());
+
         System.out.println("Competition: " + competition);
-        ChosenCompetitionHolder.setChosenCompetition(competition);
+
+        contextHolder.setChosenCompetition(competition);
     }
 }

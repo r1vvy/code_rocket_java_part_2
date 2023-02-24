@@ -29,7 +29,11 @@ public class CompetitionService {
     }
 
     public Competition getCompetitionById(Integer id) {
-        return competitionRepository.findById(id)
-                .orElseThrow(() -> new NoEntityFoundException("No Competition object found with id =" + id));
+        Competition competition = competitionRepository.findById(id)
+                .orElseThrow(() -> new NoEntityFoundException("No Competition object found with id = " + id));
+
+        return competition;
     }
+
+
 }
