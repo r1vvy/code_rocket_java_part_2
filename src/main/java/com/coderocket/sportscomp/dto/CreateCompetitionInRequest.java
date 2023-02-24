@@ -6,7 +6,7 @@ import lombok.Value;
 import java.time.LocalDate;
 
 @Value
-public class CreateCompetitionInRequest {
+public class CreateCompetitionInRequest implements Request{
     String Title;
     Integer capacity;
     LocalDate registrationOpen;

@@ -71,12 +71,16 @@ public class UserInput {
     }
 
     public DeleteCompetitionInActionRequest getDeleteCompetitionRequest() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Are you sure you wish to continue? [Y/N]");
+
+        Scanner scanner = new Scanner(System.in);
         String userChoice = scanner.nextLine();
+
         if(userChoice.equalsIgnoreCase("Y")) {
             return new DeleteCompetitionInActionRequest(ChosenCompetitionHolder.getChosenCompetition());
         } else if(userChoice.equalsIgnoreCase("N")){
+            // TODO create interface Request Handler that handles wether the request should be cancelled or not.
+            // TODO create DeleteCompetitionHandler that handles the request.
             return null;
         } else {
             throw new IllegalArgumentException("Invalid input");

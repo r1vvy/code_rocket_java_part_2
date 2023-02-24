@@ -4,6 +4,6 @@ import com.coderocket.sportscomp.domain.Competition;
 import lombok.Value;
 
 @Value
-public class DeleteCompetitionInActionRequest {
+public class DeleteCompetitionInActionRequest implements Request {
     Competition competition;
 }

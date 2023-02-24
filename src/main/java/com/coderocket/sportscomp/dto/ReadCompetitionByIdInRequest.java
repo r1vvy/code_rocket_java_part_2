@@ -3,6 +3,6 @@ package com.coderocket.sportscomp.dto;
 import lombok.Value;
 
 @Value
-public class ReadCompetitionByIdInRequest {
+public class ReadCompetitionByIdInRequest implements Request {
     Integer id;
 }
