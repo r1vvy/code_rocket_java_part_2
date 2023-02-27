@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'com.coderocket'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':sportscomp-utils')
+    implementation project(':sportscomp-core')
+    implementation project(':sportscomp-domain')
+}
+
+test {
+    useJUnitPlatform()
+}
