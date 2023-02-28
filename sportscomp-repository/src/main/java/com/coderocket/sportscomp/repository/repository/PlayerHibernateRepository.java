@@ -34,6 +34,15 @@ public class PlayerHibernateRepository implements PlayerRepository {
     }
 
     @Override
+    public void delete(Player player) {
+        var entity = domainToPlayerEntityConverter.convert(player);
+        System.out.println(player.getId().toString());
+        entity.setId(player.getId());
+
+        sessionFactory.getCurrentSession().remove(entity);
+    }
+
+    @Override
     public Optional<Player> findPlayerById(Integer id) {
         Session session = sessionFactory.openSession();
 

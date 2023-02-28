@@ -87,23 +87,48 @@ public class UserInput {
     }
 
     public DeleteCompetitionRequest getDeleteCompetitionRequest() {
+        String userChoice = getConfirmationFromUser();
+
+        if(userChoice.equalsIgnoreCase("Y")) {
+            DeleteCompetitionRequest request = new DeleteCompetitionRequest();
+            request.setCompetition(competitionContextHolder.getChosenCompetition());
+            return request;
+        } else if(userChoice.equalsIgnoreCase("N")){
+            // TODO
+            return null;
+        } else {
+            // TOOD this.getDeleteCompetitionRequest();
+            throw new IllegalArgumentException("Invalid input. Please enter Y or N.");
+        }
+    }
+
+    private static String getConfirmationFromUser() {
+        System.out.println("Are you sure you wish to continue? [Y/N]");
+
+        Scanner scanner = new Scanner(System.in);
+        String userChoice = scanner.nextLine();
+
+        return userChoice;
+    }
+
+    public DeletePlayerRequest getDeletePlayerRequest() {
         System.out.println("Are you sure you wish to continue? [Y/N]");
 
         Scanner scanner = new Scanner(System.in);
         String userChoice = scanner.nextLine();
 
         if(userChoice.equalsIgnoreCase("Y")) {
-            DeleteCompetitionRequest request = new DeleteCompetitionRequest();
-
-            request.setCompetition(competitionContextHolder.getChosenCompetition());
+            DeletePlayerRequest request = new DeletePlayerRequest();
+            request.setPlayer(playerContextHolder.getChosenPlayer());
 
             return request;
+
         } else if(userChoice.equalsIgnoreCase("N")){
-            // TODO create interface Request Handler that handles wether the request should be cancelled or not.
-            // TODO create DeleteCompetitionHandler that handles the request.
+            // TODO
             return null;
         } else {
-            throw new IllegalArgumentException("Invalid input");
+            // TOOD this.getDeleteCompetitionRequest();
+            throw new IllegalArgumentException("Invalid input. Please enter Y or N.");
         }
     }
 }

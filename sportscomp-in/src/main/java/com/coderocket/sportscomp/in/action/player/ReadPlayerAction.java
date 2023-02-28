@@ -20,7 +20,7 @@ public class ReadPlayerAction implements MenuActionWithSubActions {
     private final GetPlayerUseCase getPlayerUseCase;
 
 
-    @Autowired()
+    @Autowired
     @Qualifier("playerContextHolder")
     private PlayerContextHolder contextHolder;
 
@@ -37,6 +37,7 @@ public class ReadPlayerAction implements MenuActionWithSubActions {
     public void execute() {
         var request = userInput.getPlayerReadRequest();
         var player = getPlayerUseCase.getPlayer(request.getId());
+
         contextHolder.setChosenPlayer(player);
 
         System.out.println("Player: " + player.toString());

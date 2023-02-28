@@ -37,7 +37,6 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
     @Override
     public void delete(Competition competition) {
         var entity = domainToEntityConverter.convert(competition);
-        //sessionFactory.getCurrentSession().find(CompetitionEntity.class, );
         entity.setId(competition.getId());
 
         sessionFactory.getCurrentSession().remove(entity);

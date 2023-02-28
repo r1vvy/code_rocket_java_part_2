@@ -7,6 +7,7 @@ import com.coderocket.sportscomp.in.action.competition.DeleteCompetitionAction;
 import com.coderocket.sportscomp.in.action.competition.ReadAllCompetitionsAction;
 import com.coderocket.sportscomp.in.action.competition.ReadCompetitionAction;
 import com.coderocket.sportscomp.in.action.player.CreatePlayerAction;
+import com.coderocket.sportscomp.in.action.player.DeletePlayerAction;
 import com.coderocket.sportscomp.in.action.player.ReadAllPlayersAction;
 import com.coderocket.sportscomp.in.action.player.ReadPlayerAction;
 import com.coderocket.sportscomp.in.dto.CompetitionContextHolder;
@@ -61,8 +62,10 @@ public class ActionConfig {
 
     @Bean("playerSubActions")
     public List<MenuAction> playerSubActions(
+            DeletePlayerAction deletePlayerAction
     ) {
         return List.of(
+                deletePlayerAction
         );
     }
 

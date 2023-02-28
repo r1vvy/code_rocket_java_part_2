@@ -13,6 +13,7 @@ public class PlayerEntityToPlayerDomainConverter {
                 .name(entity.getName())
                 .surname(entity.getSurname())
                 .rating(entity.getRating())
+                .id(entity.getId())
                 .build();
     }
 }

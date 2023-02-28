@@ -9,6 +9,8 @@ public interface PlayerRepository {
 
     void save(Player player);
 
+    void delete(Player player);
+
     Optional<Player> findPlayerById(Integer id);
     List<Player> findAllPlayers();
 }
