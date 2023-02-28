@@ -24,7 +24,7 @@ public class ThreadLocalCompetitionContextHolder implements CompetitionContextHo
     }
 
     @Override
-    public void clearChosenCompetition() {
+    public void clear() {
         chosenCompetition.remove();
     }
 }

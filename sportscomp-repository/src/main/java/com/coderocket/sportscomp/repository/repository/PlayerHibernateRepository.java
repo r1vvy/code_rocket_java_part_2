@@ -15,6 +15,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -30,6 +31,30 @@ public class PlayerHibernateRepository implements PlayerRepository {
         var entity = domainToPlayerEntityConverter.convert(player);
 
         sessionFactory.getCurrentSession().persist(entity);
+    }
+
+    @Override
+    public Optional<Player> findPlayerById(Integer id) {
+        Session session = sessionFactory.openSession();
+
+        try {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<PlayerEntity> criteriaQuery = builder.createQuery(PlayerEntity.class);
+
+            Root<PlayerEntity> root = criteriaQuery.from(PlayerEntity.class);
+            criteriaQuery.select(root);
+
+            criteriaQuery.select(root).where(builder.equal(root.get("id"), id));
+
+
+            Query<PlayerEntity> sessionQuery = session.createQuery(criteriaQuery);
+
+            return sessionQuery
+                    .uniqueResultOptional()
+                    .map(entityToPlayerDomainConverter::convert);
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -51,4 +76,6 @@ public class PlayerHibernateRepository implements PlayerRepository {
             session.close();
         }
     }
+
+
 }

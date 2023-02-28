@@ -23,4 +23,7 @@ public class Competition {
     LocalDate startDate;
     @DateTimeFormat(pattern = "YYYY-MM-DD")
     LocalDate endDate;
+
+
+
 }

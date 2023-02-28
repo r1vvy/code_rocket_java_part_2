@@ -21,7 +21,7 @@ public class CreateCompetitionAction implements MenuAction {
 
     @Override
     public void execute() {
-        var request = userInput.getCompetitionCreationRequest();
+        var request = userInput.getCreateCompetitionRequest();
         var competition = converter.convert(request);
 
         saveCompetitionUseCase.saveCompetition(competition);

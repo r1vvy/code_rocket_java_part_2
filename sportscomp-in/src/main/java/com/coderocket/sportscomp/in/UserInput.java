@@ -16,12 +16,16 @@ public class UserInput {
     @Qualifier("competitionContextHolder")
     private CompetitionContextHolder competitionContextHolder;
 
+    @Autowired
+    @Qualifier("playerContextHolder")
+    private PlayerContextHolder playerContextHolder;
+
     public int getActionChoice() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    public CreatePlayerInRequest getPlayerCreationRequest() {
+    public CreatePlayerInRequest getCreatePlayerRequest() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Name: ");
@@ -33,7 +37,16 @@ public class UserInput {
         return new CreatePlayerInRequest(name, surname);
     }
 
-    public CreateCompetitionInRequest getCompetitionCreationRequest() {
+    public ReadPlayerByIdRequest getPlayerReadRequest() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the ID: ");
+        Integer id = Integer.valueOf(scanner.nextInt());
+
+        return new ReadPlayerByIdRequest(id);
+    }
+
+    public CreateCompetitionInRequest getCreateCompetitionRequest() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Title: ");

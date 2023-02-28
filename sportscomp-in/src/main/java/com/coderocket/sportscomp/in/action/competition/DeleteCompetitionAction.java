@@ -30,6 +30,6 @@ public class DeleteCompetitionAction implements MenuAction {
         var request = userInput.getDeleteCompetitionRequest();
 
         deleteCompetition.deleteCompetition(request.getCompetition());
-        contextHolder.clearChosenCompetition();
+        contextHolder.clear();
     }
 }

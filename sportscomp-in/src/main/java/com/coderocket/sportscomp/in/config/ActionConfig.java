@@ -8,8 +8,11 @@ import com.coderocket.sportscomp.in.action.competition.ReadAllCompetitionsAction
 import com.coderocket.sportscomp.in.action.competition.ReadCompetitionAction;
 import com.coderocket.sportscomp.in.action.player.CreatePlayerAction;
 import com.coderocket.sportscomp.in.action.player.ReadAllPlayersAction;
+import com.coderocket.sportscomp.in.action.player.ReadPlayerAction;
 import com.coderocket.sportscomp.in.dto.CompetitionContextHolder;
+import com.coderocket.sportscomp.in.dto.PlayerContextHolder;
 import com.coderocket.sportscomp.in.dto.ThreadLocalCompetitionContextHolder;
+import com.coderocket.sportscomp.in.dto.ThreadLocalPlayerContextHolder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,6 +27,7 @@ public class ActionConfig {
             ReadAllCompetitionsAction readAllCompetitionsAction,
             ReadAllPlayersAction readAllPlayersAction,
             ReadCompetitionAction readCompetitionAction,
+            ReadPlayerAction readPlayerAction,
             ExitAction exitAction
     ) {
         return List.of(
@@ -32,6 +36,7 @@ public class ActionConfig {
                 readAllCompetitionsAction,
                 readAllPlayersAction,
                 readCompetitionAction,
+                readPlayerAction,
                 exitAction
         );
     }
@@ -51,5 +56,18 @@ public class ActionConfig {
     @Bean("competitionContextHolder")
     public CompetitionContextHolder competitionContextHolder() {
         return new ThreadLocalCompetitionContextHolder();
+    }
+
+
+    @Bean("playerSubActions")
+    public List<MenuAction> playerSubActions(
+    ) {
+        return List.of(
+        );
+    }
+
+    @Bean("playerContextHolder")
+    public PlayerContextHolder playerContextHolder() {
+        return new ThreadLocalPlayerContextHolder();
     }
 }

@@ -23,7 +23,7 @@ public class CreatePlayerAction implements MenuAction {
 
     @Override
     public void execute() {
-        var request = userInput.getPlayerCreationRequest();
+        var request = userInput.getCreatePlayerRequest();
         var player = converter.convert(request);
         savePlayerUseCase.savePlayer(player);
     }

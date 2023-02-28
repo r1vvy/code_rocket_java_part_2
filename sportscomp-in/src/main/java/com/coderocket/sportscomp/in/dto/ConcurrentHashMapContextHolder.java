@@ -23,7 +23,7 @@ public class ConcurrentHashMapContextHolder implements CompetitionContextHolder 
     }
 
     @Override
-    public void clearChosenCompetition() {
+    public void clear() {
         competitionMap.remove(Thread.currentThread());
     }
 }
