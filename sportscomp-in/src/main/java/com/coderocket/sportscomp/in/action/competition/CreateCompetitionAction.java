@@ -1,17 +1,18 @@
-package com.coderocket.sportscomp.in.action;
+package com.coderocket.sportscomp.in.action.competition;
 
-import com.coderocket.sportscomp.core.CompetitionService;
+import com.coderocket.sportscomp.core.ports.in.competition.SaveCompetitionUseCase;
 import com.coderocket.sportscomp.in.UserInput;
+import com.coderocket.sportscomp.in.action.MenuAction;
 import com.coderocket.sportscomp.in.converter.CreateCompetitionInRequestToDomainConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("createCompetitionAction")
 @RequiredArgsConstructor
 public class CreateCompetitionAction implements MenuAction {
     private final UserInput userInput;
-    private final CompetitionService competitionService;
     private final CreateCompetitionInRequestToDomainConverter converter;
+    private final SaveCompetitionUseCase saveCompetitionUseCase;
 
     @Override
     public String getName() {
@@ -23,6 +24,6 @@ public class CreateCompetitionAction implements MenuAction {
         var request = userInput.getCompetitionCreationRequest();
         var competition = converter.convert(request);
 
-        competitionService.createCompetition(competition);
+        saveCompetitionUseCase.saveCompetition(competition);
     }
 }

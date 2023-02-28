@@ -1,6 +1,7 @@
-package com.coderocket.sportscomp.repository;
+package com.coderocket.sportscomp.repository.repository;
 
 import com.coderocket.sportscomp.domain.Competition;
+import com.coderocket.sportscomp.repository.entity.CompetitionEntity;
 import com.coderocket.sportscomp.repository.converter.CompetitionDomainToCompetitionEntityConverter;
 import com.coderocket.sportscomp.repository.converter.CompetitionEntityToCompetitionDomainConverter;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -58,7 +59,6 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
                 .map(entityToDomainConverter::convert)
                 .collect(Collectors.toList());
     }
-    // TODO
     @Override
     public Optional<Competition> findById(Integer id) {
         Session session = sessionFactory.getCurrentSession();

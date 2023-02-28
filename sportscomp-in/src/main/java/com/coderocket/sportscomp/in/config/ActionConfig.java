@@ -1,6 +1,13 @@
 package com.coderocket.sportscomp.in.config;
 
-import com.coderocket.sportscomp.in.action.*;
+import com.coderocket.sportscomp.in.action.ExitAction;
+import com.coderocket.sportscomp.in.action.MenuAction;
+import com.coderocket.sportscomp.in.action.competition.CreateCompetitionAction;
+import com.coderocket.sportscomp.in.action.competition.DeleteCompetitionAction;
+import com.coderocket.sportscomp.in.action.competition.ReadAllCompetitionsAction;
+import com.coderocket.sportscomp.in.action.competition.ReadCompetitionAction;
+import com.coderocket.sportscomp.in.action.player.CreatePlayerAction;
+import com.coderocket.sportscomp.in.action.player.ReadAllPlayersAction;
 import com.coderocket.sportscomp.in.dto.CompetitionContextHolder;
 import com.coderocket.sportscomp.in.dto.ThreadLocalCompetitionContextHolder;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class AppConfig {
+public class ActionConfig {
     @Bean("userReadMenuActions")
     public List<MenuAction> userReadMenuActions(
             CreateCompetitionAction createCompetitionAction,

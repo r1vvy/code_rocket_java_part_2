@@ -1,7 +1,9 @@
-package com.coderocket.sportscomp.in.action;
+package com.coderocket.sportscomp.in.action.competition;
 
-import com.coderocket.sportscomp.core.CompetitionService;
+import com.coderocket.sportscomp.core.ports.in.competition.GetCompetitionByIdUseCase;
 import com.coderocket.sportscomp.in.UserInput;
+import com.coderocket.sportscomp.in.action.MenuAction;
+import com.coderocket.sportscomp.in.action.MenuActionWithSubActions;
 import com.coderocket.sportscomp.in.dto.CompetitionContextHolder;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+@Component("readCompetitionAction")
 @AllArgsConstructor
 public class ReadCompetitionAction implements MenuActionWithSubActions {
     private final UserInput userInput;
-    private final CompetitionService competitionService;
-
+    private final GetCompetitionByIdUseCase getCompetitionByIdUseCase;
     @Autowired()
     @Qualifier("competitionContextHolder")
     private final CompetitionContextHolder contextHolder;
@@ -38,7 +39,7 @@ public class ReadCompetitionAction implements MenuActionWithSubActions {
     @Override
     public void execute() {
         var request = userInput.getReadCompetitionByIdRequest();
-        var competition = competitionService.getCompetitionById(request.getId());
+        var competition = getCompetitionByIdUseCase.getCompetition(request.getId());
 
         System.out.println("Competition: " + competition);
 

@@ -1,6 +1,7 @@
-package com.coderocket.sportscomp.repository;
+package com.coderocket.sportscomp.repository.repository;
 
 import com.coderocket.sportscomp.domain.Player;
+import com.coderocket.sportscomp.repository.entity.PlayerEntity;
 import com.coderocket.sportscomp.repository.converter.PlayerDomainToPlayerEntityConverter;
 import com.coderocket.sportscomp.repository.converter.PlayerEntityToPlayerDomainConverter;
 import jakarta.persistence.criteria.CriteriaBuilder;

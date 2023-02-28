@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.repository;
+package com.coderocket.sportscomp.repository.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

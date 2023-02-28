@@ -1,18 +1,18 @@
-package com.coderocket.sportscomp.in.action;
+package com.coderocket.sportscomp.in.action.player;
 
 
-import com.coderocket.sportscomp.core.PlayerService;
+import com.coderocket.sportscomp.core.ports.in.player.GetAllPlayersUseCase;
 import com.coderocket.sportscomp.domain.Player;
+import com.coderocket.sportscomp.in.action.MenuAction;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+@Component("readAllPlayersAction")
 @AllArgsConstructor
 public class ReadAllPlayersAction implements MenuAction {
-    private final PlayerService playerService;
-
+    GetAllPlayersUseCase getAllPlayersUseCase;
     @Override
     public String getName() {
         return "View all players";
@@ -20,8 +20,7 @@ public class ReadAllPlayersAction implements MenuAction {
 
     @Override
     public void execute() {
-        var players = playerService.getAllPlayers();
-        // TODO: Add validation
+        var players = getAllPlayersUseCase.getAllPlayers();
         printAllPlayers(players);
     }
 

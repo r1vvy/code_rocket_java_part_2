@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.repository.converter;
 
 
 import com.coderocket.sportscomp.domain.Player;
-import com.coderocket.sportscomp.repository.PlayerEntity;
+import com.coderocket.sportscomp.repository.entity.PlayerEntity;
 import org.springframework.stereotype.Component;
 
 @Component

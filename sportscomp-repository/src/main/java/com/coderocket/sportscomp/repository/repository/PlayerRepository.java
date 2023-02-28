@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.repository;
+package com.coderocket.sportscomp.repository.repository;
 
 import com.coderocket.sportscomp.domain.Player;
 

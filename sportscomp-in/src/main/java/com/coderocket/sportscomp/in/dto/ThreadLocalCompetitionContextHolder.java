@@ -1,7 +1,11 @@
 package com.coderocket.sportscomp.in.dto;
 
 import com.coderocket.sportscomp.domain.Competition;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component("competitionContextHolder")
+@AllArgsConstructor
 public class ThreadLocalCompetitionContextHolder implements CompetitionContextHolder {
     private final ThreadLocal<Competition> chosenCompetition = new ThreadLocal<>();
 

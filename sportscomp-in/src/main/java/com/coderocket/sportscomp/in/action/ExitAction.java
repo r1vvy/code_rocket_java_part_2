@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.in.action;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("exitAction")
 public class ExitAction implements MenuAction {
 
     @Override
