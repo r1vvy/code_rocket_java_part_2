@@ -6,4 +6,5 @@ import lombok.Value;
 public class CreatePlayerInRequest implements Request {
     String name;
     String surname;
+    Integer rating;
 }

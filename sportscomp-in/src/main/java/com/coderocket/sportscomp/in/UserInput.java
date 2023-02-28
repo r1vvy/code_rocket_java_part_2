@@ -10,8 +10,6 @@ import java.util.Scanner;
 
 @Component
 public class UserInput {
-
-    // TODO: separate this;
     @Autowired
     @Qualifier("competitionContextHolder")
     private CompetitionContextHolder competitionContextHolder;
@@ -34,7 +32,16 @@ public class UserInput {
         System.out.println("Surname: ");
         String surname = scanner.nextLine();
 
-        return new CreatePlayerInRequest(name, surname);
+        System.out.println("Rating (keep empty to be default): ");
+        String inputRating = scanner.nextLine();
+
+        Integer rating;
+        if(inputRating.isEmpty()) {
+            rating = 1000;
+        } else {
+            rating = Integer.valueOf(inputRating);
+        }
+        return new CreatePlayerInRequest(name, surname, rating);
     }
 
     public ReadPlayerByIdRequest getPlayerReadRequest() {

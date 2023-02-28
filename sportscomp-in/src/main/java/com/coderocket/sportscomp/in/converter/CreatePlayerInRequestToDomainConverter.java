@@ -11,6 +11,7 @@ public class CreatePlayerInRequestToDomainConverter {
         return Player.builder()
                 .name(request.getName())
                 .surname(request.getSurname())
+                .rating(request.getRating())
                 .build();
     }
 }
