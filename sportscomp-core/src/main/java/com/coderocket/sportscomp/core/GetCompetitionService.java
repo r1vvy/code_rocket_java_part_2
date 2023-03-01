@@ -1,9 +1,9 @@
 package com.coderocket.sportscomp.core;
 
 import com.coderocket.sportscomp.core.exceptions.NoEntityFoundException;
-import com.coderocket.sportscomp.core.ports.in.competition.GetCompetitionByIdUseCase;
-import com.coderocket.sportscomp.core.ports.out.FindCompetitionByIdPort;
+import com.coderocket.sportscomp.core.ports.out.competition.FindCompetitionByIdPort;
 import com.coderocket.sportscomp.domain.Competition;
+import com.coderocket.sportscomp.domain.usecase.competition.GetCompetitionByIdUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

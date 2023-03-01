@@ -1,6 +1,6 @@
 package com.coderocket.sportscomp.repository.adapter.competition;
 
-import com.coderocket.sportscomp.core.ports.out.SaveCompetitionPort;
+import com.coderocket.sportscomp.core.ports.out.competition.SaveCompetitionPort;
 import com.coderocket.sportscomp.domain.Competition;
 import com.coderocket.sportscomp.repository.repository.CompetitionRepository;
 import jakarta.transaction.Transactional;

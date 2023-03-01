@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.core.ports.in.competition;
+package com.coderocket.sportscomp.domain.usecase.competition;
 
 import com.coderocket.sportscomp.domain.Competition;
 

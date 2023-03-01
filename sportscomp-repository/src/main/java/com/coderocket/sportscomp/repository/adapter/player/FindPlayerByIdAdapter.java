@@ -1,6 +1,6 @@
 package com.coderocket.sportscomp.repository.adapter.player;
 
-import com.coderocket.sportscomp.core.ports.out.FindPlayerByIdPort;
+import com.coderocket.sportscomp.core.ports.out.player.FindPlayerByIdPort;
 import com.coderocket.sportscomp.domain.Player;
 import com.coderocket.sportscomp.repository.repository.PlayerRepository;
 import jakarta.transaction.Transactional;
