@@ -1,9 +1,9 @@
-package com.coderocket.sportscomp.in.dto;
+package com.coderocket.sportscomp.in.dto.request.player;
 
 import com.coderocket.sportscomp.domain.Player;
 import lombok.Data;
 
 @Data
-public class DeletePlayerRequest {
+public class DeletePlayerInRequest {
     Player player;
 }

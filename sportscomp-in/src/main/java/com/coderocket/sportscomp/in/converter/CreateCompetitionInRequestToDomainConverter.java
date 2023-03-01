@@ -1,7 +1,7 @@
 package com.coderocket.sportscomp.in.converter;
 
 import com.coderocket.sportscomp.domain.Competition;
-import com.coderocket.sportscomp.in.dto.CreateCompetitionInRequest;
+import com.coderocket.sportscomp.in.dto.request.competition.CreateCompetitionInRequest;
 import org.springframework.stereotype.Component;
 
 @Component

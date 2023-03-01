@@ -4,5 +4,5 @@ import com.coderocket.sportscomp.domain.Player;
 
 public interface SavePlayerPort {
 
-    void save(Player player);
+    Player save(Player player);
 }

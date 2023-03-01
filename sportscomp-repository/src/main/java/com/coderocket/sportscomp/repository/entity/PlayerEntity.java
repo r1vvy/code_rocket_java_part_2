@@ -1,6 +1,5 @@
 package com.coderocket.sportscomp.repository.entity;
 
-import com.coderocket.sportscomp.repository.entity.CompetitionPlayerEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

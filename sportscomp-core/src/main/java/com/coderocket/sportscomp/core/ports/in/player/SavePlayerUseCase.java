@@ -4,5 +4,5 @@ import com.coderocket.sportscomp.domain.Player;
 
 public interface SavePlayerUseCase {
 
-    void savePlayer(Player player);
+    Player savePlayer(Player player);
 }

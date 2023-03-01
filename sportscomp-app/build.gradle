@@ -10,12 +10,12 @@ repositories {
 }
 
 dependencies {
-    implementation project(":sportscomp-config")
     implementation project(":sportscomp-repository")
     implementation project(":sportscomp-core")
     implementation project(":sportscomp-domain")
     implementation project(":sportscomp-in")
 
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.3'
 }
 
 test {

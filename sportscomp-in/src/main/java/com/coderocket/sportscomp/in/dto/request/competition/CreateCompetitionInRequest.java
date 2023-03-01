@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.in.dto;
+package com.coderocket.sportscomp.in.dto.request.competition;
 
 
 import lombok.Value;

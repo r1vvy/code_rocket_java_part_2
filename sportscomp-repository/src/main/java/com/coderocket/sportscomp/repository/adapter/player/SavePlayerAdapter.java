@@ -14,7 +14,7 @@ public class SavePlayerAdapter implements SavePlayerPort {
     private final PlayerRepository repository;
 
     @Override
-    public void save(Player player) {
-        repository.save(player);
+    public Player save(Player player) {
+        return repository.save(player);
     }
 }

@@ -13,6 +13,8 @@ dependencies {
     implementation project(':sportscomp-utils')
     implementation project(':sportscomp-core')
     implementation project(':sportscomp-domain')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.3'
 }
 
 test {

@@ -1,10 +1,10 @@
-package com.coderocket.sportscomp.in.dto;
+package com.coderocket.sportscomp.in.dto.request.competition;
 
 
 import com.coderocket.sportscomp.domain.Competition;
 import lombok.Data;
 
 @Data
-public class DeleteCompetitionRequest {
+public class DeleteCompetitionInRequest {
     Competition competition;
 }

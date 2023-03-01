@@ -12,7 +12,7 @@ public class SavePlayerService implements SavePlayerUseCase {
     private final SavePlayerPort port;
 
     @Override
-    public void savePlayer(Player player) {
-        port.save(player);
+    public Player savePlayer(Player player) {
+        return port.save(player);
     }
 }

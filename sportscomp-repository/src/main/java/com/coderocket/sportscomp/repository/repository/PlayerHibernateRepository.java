@@ -27,10 +27,10 @@ public class PlayerHibernateRepository implements PlayerRepository {
     private final PlayerDomainToPlayerEntityConverter domainToPlayerEntityConverter;
 
     @Override
-    public void save(Player player) {
+    public Player save(Player player) {
         var entity = domainToPlayerEntityConverter.convert(player);
-
         sessionFactory.getCurrentSession().persist(entity);
+        return entityToPlayerDomainConverter.convert(entity);
     }
 
     @Override
@@ -44,26 +44,10 @@ public class PlayerHibernateRepository implements PlayerRepository {
 
     @Override
     public Optional<Player> findPlayerById(Integer id) {
-        Session session = sessionFactory.openSession();
+        var entity = sessionFactory.getCurrentSession().find(PlayerEntity.class, id);
 
-        try {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<PlayerEntity> criteriaQuery = builder.createQuery(PlayerEntity.class);
-
-            Root<PlayerEntity> root = criteriaQuery.from(PlayerEntity.class);
-            criteriaQuery.select(root);
-
-            criteriaQuery.select(root).where(builder.equal(root.get("id"), id));
-
-
-            Query<PlayerEntity> sessionQuery = session.createQuery(criteriaQuery);
-
-            return sessionQuery
-                    .uniqueResultOptional()
-                    .map(entityToPlayerDomainConverter::convert);
-        } finally {
-            session.close();
-        }
+        return Optional.ofNullable(entity)
+                .map(entityToPlayerDomainConverter::convert);
     }
 
     @Override
