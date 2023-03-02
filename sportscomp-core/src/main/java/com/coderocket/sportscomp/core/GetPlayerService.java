@@ -3,7 +3,7 @@ package com.coderocket.sportscomp.core;
 import com.coderocket.sportscomp.core.exceptions.NoEntityFoundException;
 import com.coderocket.sportscomp.core.ports.out.player.FindPlayerByIdPort;
 import com.coderocket.sportscomp.domain.Player;
-import com.coderocket.sportscomp.domain.usecase.player.GetPlayerUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.GetPlayerUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -28,10 +28,11 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
     private final CompetitionDomainToCompetitionEntityConverter domainToEntityConverter;
 
     @Override
-    public void save(Competition competition) {
+    public Competition save(Competition competition) {
         var entity = domainToEntityConverter.convert(competition);
-
         sessionFactory.getCurrentSession().persist(entity);
+
+        return entityToDomainConverter.convert(entity);
     }
 
     @Override

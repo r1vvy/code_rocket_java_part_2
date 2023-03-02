@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.domain.usecase.player;
+package com.coderocket.sportscomp.core.ports.in.player;
 
 public interface DeletePlayerUseCase {
 

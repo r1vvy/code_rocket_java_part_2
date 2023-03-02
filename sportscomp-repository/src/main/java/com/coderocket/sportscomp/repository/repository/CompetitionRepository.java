@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CompetitionRepository {
 
-    void save(Competition competition);
+    Competition save(Competition competition);
 
     void delete(Competition competition);
 

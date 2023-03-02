@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.core;
 
 import com.coderocket.sportscomp.core.ports.out.player.DeletePlayerPort;
 import com.coderocket.sportscomp.core.ports.out.player.FindPlayerByIdPort;
-import com.coderocket.sportscomp.domain.usecase.player.DeletePlayerUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.DeletePlayerUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

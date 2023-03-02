@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.core;
 
 import com.coderocket.sportscomp.core.ports.out.competition.FindAllCompetitionsPort;
 import com.coderocket.sportscomp.domain.Competition;
-import com.coderocket.sportscomp.domain.usecase.competition.GetAllCompetitionsUseCase;
+import com.coderocket.sportscomp.core.ports.in.competition.GetAllCompetitionsUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

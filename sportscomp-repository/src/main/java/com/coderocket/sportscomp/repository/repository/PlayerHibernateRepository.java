@@ -30,6 +30,7 @@ public class PlayerHibernateRepository implements PlayerRepository {
     public Player save(Player player) {
         var entity = domainToPlayerEntityConverter.convert(player);
         sessionFactory.getCurrentSession().persist(entity);
+
         return entityToPlayerDomainConverter.convert(entity);
     }
 

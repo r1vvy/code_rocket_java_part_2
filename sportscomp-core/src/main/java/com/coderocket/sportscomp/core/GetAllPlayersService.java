@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.core;
 
 import com.coderocket.sportscomp.core.ports.out.player.FindAllPlayersPort;
 import com.coderocket.sportscomp.domain.Player;
-import com.coderocket.sportscomp.domain.usecase.player.GetAllPlayersUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.GetAllPlayersUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

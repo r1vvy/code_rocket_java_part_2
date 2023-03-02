@@ -15,7 +15,7 @@ public class SaveCompetitionAdapter implements SaveCompetitionPort {
     private final CompetitionRepository repository;
 
     @Override
-    public void save(Competition competition) {
-        repository.save(competition);
+    public Competition save(Competition competition) {
+        return repository.save(competition);
     }
 }

@@ -4,5 +4,5 @@ import com.coderocket.sportscomp.domain.Competition;
 
 public interface SaveCompetitionPort {
 
-    void save(Competition competition);
+    Competition save(Competition competition);
 }

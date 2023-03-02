@@ -1,8 +1,8 @@
 package com.coderocket.sportscomp.in.controller;
 
-import com.coderocket.sportscomp.domain.usecase.player.DeletePlayerUseCase;
-import com.coderocket.sportscomp.domain.usecase.player.GetPlayerUseCase;
-import com.coderocket.sportscomp.domain.usecase.player.SavePlayerUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.DeletePlayerUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.GetPlayerUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.SavePlayerUseCase;
 import com.coderocket.sportscomp.in.converter.CreatePlayerInRequestToDomainConverter;
 import com.coderocket.sportscomp.in.converter.PlayerToCreatePlayerInResponseConverter;
 import com.coderocket.sportscomp.in.converter.PlayerToGetPlayerInResponseConverter;
@@ -20,8 +20,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class PlayerController {
     private final SavePlayerUseCase savePlayerUseCase;
     private final GetPlayerUseCase getPlayerUseCase;
-
     private final DeletePlayerUseCase deletePlayerUseCase;
+
     private final CreatePlayerInRequestToDomainConverter createPlayerInRequestToDomainConverter;
     private final PlayerToCreatePlayerInResponseConverter playerToCreatePlayerInResponseConverter;
     private final PlayerToGetPlayerInResponseConverter playerToGetPlayerInResponseConverter;
