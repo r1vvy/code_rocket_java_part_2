@@ -8,8 +8,8 @@ import lombok.Value;
 @Builder
 public class Player {
     Integer id;
-    String name;
-    String surname;
+    String firstName;
+    String lastName;
     Integer rating;
 
 }

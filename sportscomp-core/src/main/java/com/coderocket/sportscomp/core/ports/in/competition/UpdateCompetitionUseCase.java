@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.core.ports.in.competition;
 
 import com.coderocket.sportscomp.domain.Competition;
 
-public interface GetCompetitionByIdUseCase {
+public interface UpdateCompetitionUseCase {
 
-    Competition getCompetition(Integer id);
+    Competition updateCompetition(Competition competition, Integer id);
 }

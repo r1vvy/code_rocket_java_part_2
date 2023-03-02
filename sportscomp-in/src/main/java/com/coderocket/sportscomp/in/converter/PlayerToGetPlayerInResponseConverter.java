@@ -10,8 +10,8 @@ public class PlayerToGetPlayerInResponseConverter {
     public GetPlayerInResponse convert(Player player) {
         return new GetPlayerInResponse(
                 player.getId(),
-                player.getName(),
-                player.getSurname(),
+                player.getFirstName(),
+                player.getLastName(),
                 player.getRating()
         );
     }

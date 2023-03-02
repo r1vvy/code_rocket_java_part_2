@@ -19,10 +19,10 @@ public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
-    @Column(name = "name")
-    String name;
-    @Column(name = "surname")
-    String surname;
+    @Column(name = "firstName")
+    String firstName;
+    @Column(name = "lastName")
+    String lastName;
     @Column(name = "rating")
     Integer rating;
 

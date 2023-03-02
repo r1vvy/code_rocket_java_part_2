@@ -36,6 +36,30 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
     }
 
     @Override
+    public Competition update(Competition updatedCompetition, Integer id) {
+        var entityFromRepo = sessionFactory.getCurrentSession().get(CompetitionEntity.class, id);
+        //sessionFactory.getCurrentSession().evict(entityFromRepo);
+
+        if(!updatedCompetition.getTitle().equals(null))
+            entityFromRepo.setTitle(updatedCompetition.getTitle());
+        if(!updatedCompetition.getCapacity().equals(null))
+            entityFromRepo.setCapacity(updatedCompetition.getCapacity());
+        if(updatedCompetition.getRegistrationOpen() != null)
+            entityFromRepo.setRegistrationOpen(updatedCompetition.getRegistrationOpen());
+        if(updatedCompetition.getRegistrationClose() != null)
+            entityFromRepo.setRegistrationClose(updatedCompetition.getRegistrationClose());
+        if(updatedCompetition.getStartDate() != null)
+            entityFromRepo.setStartDate(updatedCompetition.getStartDate());
+        if(updatedCompetition.getEndDate() != null)
+            entityFromRepo.setEndDate(updatedCompetition.getStartDate());
+
+        sessionFactory.getCurrentSession().merge(domainToEntityConverter.convert(updatedCompetition));
+
+        return entityToDomainConverter.convert(entityFromRepo);
+    }
+
+
+    @Override
     public void delete(Competition competition) {
         var entity = domainToEntityConverter.convert(competition);
         entity.setId(competition.getId());

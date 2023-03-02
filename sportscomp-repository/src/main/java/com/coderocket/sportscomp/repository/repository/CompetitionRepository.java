@@ -11,6 +11,8 @@ public interface CompetitionRepository {
 
     void delete(Competition competition);
 
+    Competition update(Competition updatedCompetition, Integer id);
+
     List<Competition> findAllCompetitions();
 
     // TODO

@@ -11,8 +11,8 @@ public class PlayerToCreatePlayerInResponseConverter {
 
         return new CreatePlayerInResponse(
                 player.getId(),
-                player.getName(),
-                player.getSurname(),
+                player.getFirstName(),
+                player.getLastName(),
                 player.getRating()
         );
     }

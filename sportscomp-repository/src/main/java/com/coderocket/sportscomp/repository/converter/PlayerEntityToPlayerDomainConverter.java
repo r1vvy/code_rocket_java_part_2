@@ -10,8 +10,8 @@ public class PlayerEntityToPlayerDomainConverter {
 
     public Player convert(PlayerEntity entity) {
         return Player.builder()
-                .name(entity.getName())
-                .surname(entity.getSurname())
+                .firstName(entity.getFirstName())
+                .lastName(entity.getLastName())
                 .rating(entity.getRating())
                 .id(entity.getId())
                 .build();

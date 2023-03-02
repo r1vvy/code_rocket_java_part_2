@@ -14,5 +14,4 @@ public class SportsCompApplication {
 
 		SpringApplication.run(SportsCompApplication.class);
 	}
-
 }

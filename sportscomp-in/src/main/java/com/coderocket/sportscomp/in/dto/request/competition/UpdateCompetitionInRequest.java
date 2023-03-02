@@ -1,9 +1,8 @@
-package com.coderocket.sportscomp.in.dto.response.competition;
+package com.coderocket.sportscomp.in.dto.request.competition;
 
 import java.time.LocalDate;
 
-public record GetCompetitionInResponse(
-        Integer id,
+public record UpdateCompetitionInRequest(
         String title,
         Integer capacity,
         LocalDate registrationOpen,

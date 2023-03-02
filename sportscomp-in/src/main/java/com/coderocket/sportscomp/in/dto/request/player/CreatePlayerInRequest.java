@@ -1,8 +1,8 @@
 package com.coderocket.sportscomp.in.dto.request.player;
 
 public record CreatePlayerInRequest (
-        String name,
-        String surname,
+        String firstName,
+        String lastName,
         Integer rating
 )
 {

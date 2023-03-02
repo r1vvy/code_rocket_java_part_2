@@ -9,8 +9,8 @@ public class CreatePlayerInRequestToDomainConverter {
 
     public Player convert(CreatePlayerInRequest request) {
         return Player.builder()
-                .name(request.name())
-                .surname(request.surname())
+                .firstName(request.firstName())
+                .lastName(request.lastName())
                 .rating(request.rating())
                 .build();
     }
