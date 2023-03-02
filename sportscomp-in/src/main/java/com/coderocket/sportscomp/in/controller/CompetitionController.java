@@ -1,5 +1,6 @@
 package com.coderocket.sportscomp.in.controller;
 
+import com.coderocket.sportscomp.core.ports.in.competition.DeleteCompetitionUseCase;
 import com.coderocket.sportscomp.core.ports.in.competition.GetCompetitionByIdUseCase;
 import com.coderocket.sportscomp.core.ports.in.competition.SaveCompetitionUseCase;
 import com.coderocket.sportscomp.in.converter.CompetitionToCreateCompetitionInResponseConverter;
@@ -7,6 +8,7 @@ import com.coderocket.sportscomp.in.converter.CompetitionToGetInResponseConverte
 import com.coderocket.sportscomp.in.converter.CreateCompetitionInRequestToDomainConverter;
 import com.coderocket.sportscomp.in.dto.request.competition.CreateCompetitionInRequest;
 import com.coderocket.sportscomp.in.dto.response.competition.CreateCompetitionInResponse;
+import com.coderocket.sportscomp.in.dto.response.competition.DeleteCompetitionInResponse;
 import com.coderocket.sportscomp.in.dto.response.competition.GetCompetitionInResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class CompetitionController {
     private final SaveCompetitionUseCase saveCompetitionUseCase;
     private final GetCompetitionByIdUseCase getCompetitionByIdUseCase;
+    private final DeleteCompetitionUseCase deleteCompetitionUseCase;
 
 
     private final CreateCompetitionInRequestToDomainConverter createCompetitionInRequestToDomainConverter;
@@ -47,5 +50,10 @@ public class CompetitionController {
         return competitionToGetInResponseConverter.convert(competition);
     }
 
+    @DeleteMapping("/competitions/{id}")
+    public ResponseEntity<DeleteCompetitionInResponse> deletePlayerById(@PathVariable Integer id) {
+        deleteCompetitionUseCase.deleteCompetitionById(id);
 
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -1,9 +1,9 @@
 package com.coderocket.sportscomp.repository.repository;
 
 import com.coderocket.sportscomp.domain.Competition;
-import com.coderocket.sportscomp.repository.entity.CompetitionEntity;
 import com.coderocket.sportscomp.repository.converter.CompetitionDomainToCompetitionEntityConverter;
 import com.coderocket.sportscomp.repository.converter.CompetitionEntityToCompetitionDomainConverter;
+import com.coderocket.sportscomp.repository.entity.CompetitionEntity;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
