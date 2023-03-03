@@ -38,22 +38,15 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
     @Override
     public Competition update(Competition updatedCompetition, Integer id) {
         var entityFromRepo = sessionFactory.getCurrentSession().get(CompetitionEntity.class, id);
-        //sessionFactory.getCurrentSession().evict(entityFromRepo);
 
-        if(!updatedCompetition.getTitle().equals(null))
-            entityFromRepo.setTitle(updatedCompetition.getTitle());
-        if(!updatedCompetition.getCapacity().equals(null))
-            entityFromRepo.setCapacity(updatedCompetition.getCapacity());
-        if(updatedCompetition.getRegistrationOpen() != null)
-            entityFromRepo.setRegistrationOpen(updatedCompetition.getRegistrationOpen());
-        if(updatedCompetition.getRegistrationClose() != null)
-            entityFromRepo.setRegistrationClose(updatedCompetition.getRegistrationClose());
-        if(updatedCompetition.getStartDate() != null)
-            entityFromRepo.setStartDate(updatedCompetition.getStartDate());
-        if(updatedCompetition.getEndDate() != null)
-            entityFromRepo.setEndDate(updatedCompetition.getStartDate());
+        entityFromRepo.setTitle(updatedCompetition.getTitle());
+        entityFromRepo.setCapacity(updatedCompetition.getCapacity());
+        entityFromRepo.setRegistrationOpen(updatedCompetition.getRegistrationOpen());
+        entityFromRepo.setRegistrationClose(updatedCompetition.getRegistrationClose());
+        entityFromRepo.setStartDate(updatedCompetition.getStartDate());
+        entityFromRepo.setEndDate(updatedCompetition.getEndDate());
 
-        sessionFactory.getCurrentSession().merge(domainToEntityConverter.convert(updatedCompetition));
+        sessionFactory.getCurrentSession().merge(entityFromRepo);
 
         return entityToDomainConverter.convert(entityFromRepo);
     }
