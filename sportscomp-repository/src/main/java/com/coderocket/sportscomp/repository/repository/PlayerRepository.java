@@ -9,6 +9,8 @@ public interface PlayerRepository {
 
     Player save(Player player);
 
+    Player update(Player updatedPlayer, Integer id);
+
     void delete(Player player);
 
     Optional<Player> findPlayerById(Integer id);

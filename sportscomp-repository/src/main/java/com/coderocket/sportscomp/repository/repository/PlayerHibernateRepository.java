@@ -35,6 +35,22 @@ public class PlayerHibernateRepository implements PlayerRepository {
     }
 
     @Override
+    public Player update(Player updatedPlayer, Integer id) {
+        Session session = sessionFactory.getCurrentSession();
+        var entityFromRepo = session.get(PlayerEntity.class, id);
+
+        session.evict(entityFromRepo);
+
+        entityFromRepo.setFirstName(updatedPlayer.getFirstName());
+        entityFromRepo.setLastName(updatedPlayer.getLastName());
+        entityFromRepo.setRating(updatedPlayer.getRating());
+
+        session.merge(entityFromRepo);
+
+        return entityToPlayerDomainConverter.convert(entityFromRepo);
+    }
+
+    @Override
     public void delete(Player player) {
         var entity = domainToPlayerEntityConverter.convert(player);
         entity.setId(player.getId());

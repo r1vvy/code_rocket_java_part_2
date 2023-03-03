@@ -37,7 +37,10 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
 
     @Override
     public Competition update(Competition updatedCompetition, Integer id) {
-        var entityFromRepo = sessionFactory.getCurrentSession().get(CompetitionEntity.class, id);
+        Session session = sessionFactory.getCurrentSession();
+        var entityFromRepo = session.get(CompetitionEntity.class, id);
+
+        session.evict(entityFromRepo);
 
         entityFromRepo.setTitle(updatedCompetition.getTitle());
         entityFromRepo.setCapacity(updatedCompetition.getCapacity());
@@ -46,7 +49,7 @@ public class CompetitionHibernateRepository implements CompetitionRepository {
         entityFromRepo.setStartDate(updatedCompetition.getStartDate());
         entityFromRepo.setEndDate(updatedCompetition.getEndDate());
 
-        sessionFactory.getCurrentSession().merge(entityFromRepo);
+        session.merge(entityFromRepo);
 
         return entityToDomainConverter.convert(entityFromRepo);
     }

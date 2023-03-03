@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("competitions")
 public class CompetitionController {
     private final SaveCompetitionUseCase saveCompetitionUseCase;
     private final GetCompetitionUseCase getCompetitionUseCase;
@@ -32,7 +33,7 @@ public class CompetitionController {
     private final CompetitionToGetInResponseConverter competitionToGetInResponseConverter;
     private final CompetitionToUpdateCompetitionInResponseConverter competitionToUpdateCompetitionInResponseConverter;
 
-    @PostMapping("competitions/")
+    @PostMapping("/")
     public ResponseEntity<CreateCompetitionInResponse> create(@RequestBody CreateCompetitionInRequest request) {
         var competition = createCompetitionInRequestToDomainConverter.convert(request);
         var createdCompetition = saveCompetitionUseCase.saveCompetition(competition);
@@ -48,23 +49,23 @@ public class CompetitionController {
                 .body(responseBody);
     }
 
-    @GetMapping("competitions/{id}")
+    @GetMapping("/{id}")
     public GetCompetitionInResponse findCompetitionById(@PathVariable Integer id) {
         var competition = getCompetitionUseCase.getCompetitionById(id);
 
         return competitionToGetInResponseConverter.convert(competition);
     }
 
-    @PutMapping("competitions/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<UpdateCompetitionInResponse> update(@RequestBody UpdateCompetitionInRequest request, @PathVariable Integer id) {
-       var competition = updateCompetitionInRequestToDomainConverter.convert(request);
-       var updatedCompetition = updateCompetitionUseCase.updateCompetition(competition, id);
-       var responseBody = competitionToUpdateCompetitionInResponseConverter.convert(updatedCompetition);
+           var competition = updateCompetitionInRequestToDomainConverter.convert(request);
+           var updatedCompetition = updateCompetitionUseCase.updateCompetition(competition, id);
+           var responseBody = competitionToUpdateCompetitionInResponseConverter.convert(updatedCompetition);
 
-       return ResponseEntity.ok().body(responseBody);
+           return ResponseEntity.ok().body(responseBody);
     }
 
-    @DeleteMapping("/competitions/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<DeleteCompetitionInResponse> deletePlayerById(@PathVariable Integer id) {
         deleteCompetitionUseCase.deleteCompetitionById(id);
 
