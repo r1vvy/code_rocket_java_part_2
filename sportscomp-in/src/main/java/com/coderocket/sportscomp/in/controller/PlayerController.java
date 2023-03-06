@@ -1,9 +1,6 @@
 package com.coderocket.sportscomp.in.controller;
 
-import com.coderocket.sportscomp.core.ports.in.player.DeletePlayerUseCase;
-import com.coderocket.sportscomp.core.ports.in.player.GetPlayerUseCase;
-import com.coderocket.sportscomp.core.ports.in.player.SavePlayerUseCase;
-import com.coderocket.sportscomp.core.ports.in.player.UpdatePlayerUseCase;
+import com.coderocket.sportscomp.core.ports.in.player.*;
 import com.coderocket.sportscomp.in.converter.*;
 import com.coderocket.sportscomp.in.dto.request.player.CreatePlayerInRequest;
 import com.coderocket.sportscomp.in.dto.request.player.UpdatePlayerInRequest;
@@ -16,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("players")
@@ -24,6 +24,7 @@ public class PlayerController {
     private final GetPlayerUseCase getPlayerUseCase;
     private final UpdatePlayerUseCase updatePlayerUseCase;
     private final DeletePlayerUseCase deletePlayerUseCase;
+    private final GetAllPlayersUseCase getAllPlayersUseCase;
 
     private final UpdatePlayerInRequestToDomainConverter updatePlayerInRequestToDomainConverter;
     private final CreatePlayerInRequestToDomainConverter createPlayerInRequestToDomainConverter;
@@ -55,6 +56,14 @@ public class PlayerController {
         var player = getPlayerUseCase.getPlayer(id);
 
         return playerToGetPlayerInResponseConverter.convert(player);
+    }
+
+    @GetMapping("/")
+    public List<GetPlayerInResponse> getAllPlayers() {
+        return getAllPlayersUseCase.getAllPlayers()
+                .stream()
+                .map(playerToGetPlayerInResponseConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")

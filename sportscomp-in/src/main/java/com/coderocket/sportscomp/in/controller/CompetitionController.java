@@ -1,9 +1,6 @@
 package com.coderocket.sportscomp.in.controller;
 
-import com.coderocket.sportscomp.core.ports.in.competition.DeleteCompetitionUseCase;
-import com.coderocket.sportscomp.core.ports.in.competition.GetCompetitionUseCase;
-import com.coderocket.sportscomp.core.ports.in.competition.SaveCompetitionUseCase;
-import com.coderocket.sportscomp.core.ports.in.competition.UpdateCompetitionUseCase;
+import com.coderocket.sportscomp.core.ports.in.competition.*;
 import com.coderocket.sportscomp.in.converter.*;
 import com.coderocket.sportscomp.in.dto.request.competition.CreateCompetitionInRequest;
 import com.coderocket.sportscomp.in.dto.request.competition.UpdateCompetitionInRequest;
@@ -16,12 +13,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("competitions")
 public class CompetitionController {
     private final SaveCompetitionUseCase saveCompetitionUseCase;
     private final GetCompetitionUseCase getCompetitionUseCase;
+    private final GetAllCompetitionsUseCase getAllCompetitionsUseCase;
     private final UpdateCompetitionUseCase updateCompetitionUseCase;
     private final DeleteCompetitionUseCase deleteCompetitionUseCase;
 
@@ -54,6 +55,14 @@ public class CompetitionController {
         var competition = getCompetitionUseCase.getCompetitionById(id);
 
         return competitionToGetInResponseConverter.convert(competition);
+    }
+
+    @GetMapping("/")
+    public List<GetCompetitionInResponse> getAllCompetitions() {
+        return getAllCompetitionsUseCase.getAllCompetitions()
+                .stream()
+                .map(competitionToGetInResponseConverter::convert)
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
