@@ -16,6 +16,11 @@ dependencies {
     implementation project(":sportscomp-in")
 
     implementation 'org.springframework.boot:spring-boot-starter-web:3.0.3'
+
+    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+    implementation 'org.springframework.data:spring-data-jpa:3.0.3'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.4'
 }
 
 test {

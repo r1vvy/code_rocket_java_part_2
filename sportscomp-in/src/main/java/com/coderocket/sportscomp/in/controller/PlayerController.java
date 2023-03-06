@@ -8,10 +8,10 @@ import com.coderocket.sportscomp.in.converter.*;
 import com.coderocket.sportscomp.in.dto.request.player.CreatePlayerInRequest;
 import com.coderocket.sportscomp.in.dto.request.player.UpdatePlayerInRequest;
 import com.coderocket.sportscomp.in.dto.response.player.CreatePlayerInResponse;
-import com.coderocket.sportscomp.in.dto.response.player.DeletePlayerInResponse;
 import com.coderocket.sportscomp.in.dto.response.player.GetPlayerInResponse;
 import com.coderocket.sportscomp.in.dto.response.player.UpdatePlayerInResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,6 +37,7 @@ public class PlayerController {
     public ResponseEntity<CreatePlayerInResponse>  create(@RequestBody CreatePlayerInRequest request) {
         var player = createPlayerInRequestToDomainConverter.convert(request);
         var createdPlayer = savePlayerUseCase.savePlayer(player);
+
         var responseBody = playerToCreatePlayerInResponseConverter.convert(createdPlayer);
 
         var location = ServletUriComponentsBuilder
@@ -56,7 +57,7 @@ public class PlayerController {
         return playerToGetPlayerInResponseConverter.convert(player);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UpdatePlayerInResponse> update(@RequestBody UpdatePlayerInRequest request, @PathVariable Integer id) {
         var player = updatePlayerInRequestToDomainConverter.convert(request);
         var updatedPlayer = updatePlayerUseCase.updatePlayer(player, id);
@@ -65,10 +66,9 @@ public class PlayerController {
         return ResponseEntity.ok().body(responseBody);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<DeletePlayerInResponse> deletePlayerById(@PathVariable Integer id) {
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePlayerById(@PathVariable Integer id) {
         deletePlayerUseCase.deletePlayerById(id);
-
-        return ResponseEntity.noContent().build();
     }
 }

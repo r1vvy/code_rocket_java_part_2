@@ -4,5 +4,5 @@ import com.coderocket.sportscomp.domain.Competition;
 
 public interface UpdateCompetitionPort {
 
-    Competition update(Competition updatedCompetition, Integer id);
+    Competition update(Competition competition, Integer id);
 }

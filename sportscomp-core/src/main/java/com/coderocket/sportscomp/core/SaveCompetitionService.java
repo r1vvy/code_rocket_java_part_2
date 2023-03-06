@@ -10,10 +10,9 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class SaveCompetitionService implements SaveCompetitionUseCase {
 
-    private final SaveCompetitionPort port;
-
+    private final SaveCompetitionPort saveCompetitionPort;
     @Override
     public Competition saveCompetition(Competition competition) {
-        return port.save(competition);
+        return saveCompetitionPort.save(competition);
     }
 }

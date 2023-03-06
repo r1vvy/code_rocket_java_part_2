@@ -56,16 +56,16 @@ public class CompetitionController {
         return competitionToGetInResponseConverter.convert(competition);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<UpdateCompetitionInResponse> update(@RequestBody UpdateCompetitionInRequest request, @PathVariable Integer id) {
            var competition = updateCompetitionInRequestToDomainConverter.convert(request);
-           var updatedCompetition = updateCompetitionUseCase.updateCompetition(competition, id);
+           var updatedCompetition = updateCompetitionUseCase.update(competition, id);
            var responseBody = competitionToUpdateCompetitionInResponseConverter.convert(updatedCompetition);
 
            return ResponseEntity.ok().body(responseBody);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<DeleteCompetitionInResponse> deletePlayerById(@PathVariable Integer id) {
         deleteCompetitionUseCase.deleteCompetitionById(id);
 

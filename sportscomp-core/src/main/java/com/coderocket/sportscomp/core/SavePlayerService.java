@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class SavePlayerService implements SavePlayerUseCase {
-    private final SavePlayerPort port;
+    private final SavePlayerPort savePlayerPort;
 
     @Override
     public Player savePlayer(Player player) {
-        return port.save(player);
+        return savePlayerPort.save(player);
     }
 }

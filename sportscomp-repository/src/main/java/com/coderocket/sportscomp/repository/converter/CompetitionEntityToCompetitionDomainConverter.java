@@ -9,13 +9,13 @@ public class CompetitionEntityToCompetitionDomainConverter {
 
     public Competition convert(CompetitionEntity entity) {
         return Competition.builder()
+                .id(entity.getId())
                 .title(entity.getTitle())
                 .capacity(entity.getCapacity())
                 .registrationOpen(entity.getRegistrationOpen())
                 .registrationClose(entity.getRegistrationClose())
                 .startDate(entity.getStartDate())
                 .endDate(entity.getEndDate())
-                .id(entity.getId())
                 .build();
     }
 }

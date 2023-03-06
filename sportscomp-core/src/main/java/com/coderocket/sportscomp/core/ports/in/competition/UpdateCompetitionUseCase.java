@@ -4,5 +4,5 @@ import com.coderocket.sportscomp.domain.Competition;
 
 public interface UpdateCompetitionUseCase {
 
-    Competition updateCompetition(Competition competition, Integer id);
+    Competition update(Competition competition, Integer id);
 }

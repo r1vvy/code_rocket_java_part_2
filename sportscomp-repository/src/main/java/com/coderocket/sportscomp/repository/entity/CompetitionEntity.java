@@ -7,8 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Builder
@@ -18,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class CompetitionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     @Column(name = "title")
     String title;
@@ -32,7 +30,8 @@ public class CompetitionEntity {
     LocalDate startDate;
     @Column(name = "end_date")
     LocalDate endDate;
-
+    /*
     @OneToMany(mappedBy = "competitionEntity")
     Set<CompetitionPlayerEntity> players = new HashSet<>();
+     */
 }

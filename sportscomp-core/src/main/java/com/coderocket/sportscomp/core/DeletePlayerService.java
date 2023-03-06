@@ -1,5 +1,6 @@
 package com.coderocket.sportscomp.core;
 
+import com.coderocket.sportscomp.core.exceptions.NoEntityFoundException;
 import com.coderocket.sportscomp.core.ports.out.player.DeletePlayerPort;
 import com.coderocket.sportscomp.core.ports.out.player.FindPlayerByIdPort;
 import com.coderocket.sportscomp.core.ports.in.player.DeletePlayerUseCase;
@@ -14,8 +15,9 @@ public class DeletePlayerService implements DeletePlayerUseCase {
 
     @Override
     public void deletePlayerById(Integer id) {
-        var player = findPlayerByIdPort.findById(id);
+        var player = findPlayerByIdPort.findById(id)
+                .orElseThrow(() -> new NoEntityFoundException("No player found with id = " + id));
 
-        deletePlayerPort.delete(player.get());
+        deletePlayerPort.delete(player);
     }
 }

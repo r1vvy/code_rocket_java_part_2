@@ -1,18 +1,9 @@
 package com.coderocket.sportscomp.repository.repository;
 
-import com.coderocket.sportscomp.domain.Player;
+import com.coderocket.sportscomp.repository.entity.PlayerEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
-
-public interface PlayerRepository {
-
-    Player save(Player player);
-
-    Player update(Player updatedPlayer, Integer id);
-
-    void delete(Player player);
-
-    Optional<Player> findPlayerById(Integer id);
-    List<Player> findAllPlayers();
+@Repository
+public interface PlayerRepository extends CrudRepository<PlayerEntity, Integer> {
 }

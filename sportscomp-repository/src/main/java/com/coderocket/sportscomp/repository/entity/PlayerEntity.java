@@ -6,9 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @Builder
 @Entity
@@ -17,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class PlayerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     @Column(name = "firstName")
     String firstName;
@@ -25,7 +22,8 @@ public class PlayerEntity {
     String lastName;
     @Column(name = "rating")
     Integer rating;
-
+    /*
     @OneToMany(mappedBy = "playerEntity")
     Set<CompetitionPlayerEntity> competitions = new HashSet<>();
+     */
 }

@@ -1,8 +1,7 @@
 package com.coderocket.sportscomp.core;
 
 import com.coderocket.sportscomp.core.ports.in.competition.DeleteCompetitionUseCase;
-import com.coderocket.sportscomp.core.ports.out.competition.DeleteCompetitionPort;
-import com.coderocket.sportscomp.core.ports.out.competition.FindCompetitionByIdPort;
+import com.coderocket.sportscomp.core.ports.out.competition.DeleteCompetitionByIdPort;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +9,10 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class DeleteCompetitionService implements DeleteCompetitionUseCase {
 
-    private final DeleteCompetitionPort deleteCompetitionPort;
-    private final FindCompetitionByIdPort findCompetitionByIdPort;
+    private final DeleteCompetitionByIdPort deleteCompetitionByIdPortPort;
 
     @Override
     public void deleteCompetitionById(Integer id) {
-        var competition = findCompetitionByIdPort.findById(id);
-
-        deleteCompetitionPort.delete(competition.get());
+        deleteCompetitionByIdPortPort.deleteById(id);
     }
 }

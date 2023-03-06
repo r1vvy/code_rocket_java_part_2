@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class CompetitionDomainToCompetitionEntityConverter {
     public CompetitionEntity convert(Competition competition) {
         return CompetitionEntity.builder()
+                .id(competition.getId())
                 .title(competition.getTitle())
                 .capacity(competition.getCapacity())
                 .registrationOpen(competition.getRegistrationOpen())

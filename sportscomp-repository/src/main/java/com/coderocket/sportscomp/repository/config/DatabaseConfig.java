@@ -3,17 +3,11 @@ package com.coderocket.sportscomp.repository.config;
 import org.h2.Driver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement
 public class DatabaseConfig {
     @Bean
     public DataSource dataSource() {
@@ -25,11 +19,7 @@ public class DatabaseConfig {
         return dataSource;
     }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
-
+    /*
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
@@ -54,4 +44,5 @@ public class DatabaseConfig {
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
     }
+     */
 }
