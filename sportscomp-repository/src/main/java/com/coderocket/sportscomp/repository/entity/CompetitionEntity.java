@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -30,8 +32,10 @@ public class CompetitionEntity {
     LocalDate startDate;
     @Column(name = "end_date")
     LocalDate endDate;
-    /*
-    @OneToMany(mappedBy = "competitionEntity")
-    Set<CompetitionPlayerEntity> players = new HashSet<>();
-     */
+
+    @OneToMany(
+            mappedBy = "competitionEntity",
+            cascade = CascadeType.ALL
+    )
+    private Set<PlayerInCompetition> players = new HashSet<>();
 }

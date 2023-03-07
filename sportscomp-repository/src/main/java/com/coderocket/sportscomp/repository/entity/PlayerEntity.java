@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @Builder
 @Entity
@@ -22,8 +25,10 @@ public class PlayerEntity {
     String lastName;
     @Column(name = "rating")
     Integer rating;
-    /*
-    @OneToMany(mappedBy = "playerEntity")
-    Set<CompetitionPlayerEntity> competitions = new HashSet<>();
-     */
+
+    @OneToMany(
+            mappedBy = "playerEntity",
+            cascade = CascadeType.ALL
+    )
+    private Set<PlayerInCompetition> competitions = new HashSet<>();
 }

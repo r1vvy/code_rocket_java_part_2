@@ -6,17 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @Builder
-@Entity
-@Table(name = "competition_players")
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetitionPlayerEntity {
-
-
+public class PlayerInCompetition {
     @EmbeddedId
-    CompetitionPlayerKey id;
+    PlayerInCompetitionKey id;
+
 
     @ManyToOne
     @MapsId("playerId")
@@ -28,7 +26,6 @@ public class CompetitionPlayerEntity {
     @JoinColumn(name = "competition_id")
     CompetitionEntity competitionEntity;
 
-    Integer ratingChange;
-
-    Integer placement;
+    int ratingChange;
+    int placement;
 }

@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.core;
+package com.coderocket.sportscomp.core.services.player;
 
 // TODO
 public class CompetitionPlayerService {

@@ -1,4 +1,4 @@
-package com.coderocket.sportscomp.core;
+package com.coderocket.sportscomp.core.services.competition;
 
 import com.coderocket.sportscomp.core.ports.out.competition.FindAllCompetitionsPort;
 import com.coderocket.sportscomp.domain.Competition;

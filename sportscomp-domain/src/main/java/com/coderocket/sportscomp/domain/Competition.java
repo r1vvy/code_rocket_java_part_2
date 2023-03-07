@@ -5,6 +5,7 @@ import lombok.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Value
 @Builder
@@ -20,7 +21,6 @@ public class Competition {
     LocalDate startDate;
     @DateTimeFormat(pattern = "YYYY-MM-DD")
     LocalDate endDate;
-
-
+    Set<Player> players;
 
 }
