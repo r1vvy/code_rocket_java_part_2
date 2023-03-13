@@ -5,6 +5,7 @@ import com.coderocket.sportscomp.domain.Competition;
 import com.coderocket.sportscomp.repository.converter.CompetitionDomainToCompetitionEntityConverter;
 import com.coderocket.sportscomp.repository.converter.CompetitionEntityToCompetitionDomainConverter;
 import com.coderocket.sportscomp.repository.repository.CompetitionRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ public class UpdateCompetitionAdapter implements UpdateCompetitionPort {
     private final CompetitionEntityToCompetitionDomainConverter competitionEntityToCompetitionDomainConverter;
 
     @Override
+    @Transactional
     public Competition update(Competition updatedCompetition, Integer id) {
         var entity = competitionDomainToCompetitionEntityConverter.convert(updatedCompetition);
         entity.setId(id);

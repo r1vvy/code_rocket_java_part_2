@@ -4,6 +4,7 @@ import com.coderocket.sportscomp.core.ports.out.competition.FindCompetitionByIdP
 import com.coderocket.sportscomp.domain.Competition;
 import com.coderocket.sportscomp.repository.converter.CompetitionEntityToCompetitionDomainConverter;
 import com.coderocket.sportscomp.repository.repository.CompetitionRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ public class FindCompetitionByIdAdapter implements FindCompetitionByIdPort {
     private final CompetitionEntityToCompetitionDomainConverter competitionEntityToCompetitionDomainConverter;
 
     @Override
+    @Transactional
     public Optional<Competition> findById(Integer id) {
 
         return repository.findById(id)

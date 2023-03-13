@@ -5,6 +5,7 @@ import com.coderocket.sportscomp.domain.Player;
 import com.coderocket.sportscomp.repository.converter.PlayerEntityToPlayerDomainConverter;
 import com.coderocket.sportscomp.repository.entity.PlayerEntity;
 import com.coderocket.sportscomp.repository.repository.PlayerRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class FindAllPlayersAdapter implements FindAllPlayersPort {
     private final PlayerEntityToPlayerDomainConverter playerEntityToPlayerDomainConverter;
 
     @Override
+    @Transactional
     public List<Player> findAll() {
         Iterable<PlayerEntity> iterable = playerRepository.findAll();
 

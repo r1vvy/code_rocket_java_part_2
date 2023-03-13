@@ -5,6 +5,7 @@ import com.coderocket.sportscomp.domain.Competition;
 import com.coderocket.sportscomp.repository.converter.CompetitionEntityToCompetitionDomainConverter;
 import com.coderocket.sportscomp.repository.entity.CompetitionEntity;
 import com.coderocket.sportscomp.repository.repository.CompetitionRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,7 @@ public class FindAllCompetitionsAdapter implements FindAllCompetitionsPort {
     CompetitionEntityToCompetitionDomainConverter converter;
 
     @Override
+    @Transactional
     public List<Competition> findAll() {
 
         Iterable<CompetitionEntity> iterable = repository.findAll();
