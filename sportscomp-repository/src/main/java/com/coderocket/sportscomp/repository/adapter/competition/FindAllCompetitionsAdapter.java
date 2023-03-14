@@ -18,7 +18,7 @@ import java.util.stream.StreamSupport;
 public class FindAllCompetitionsAdapter implements FindAllCompetitionsPort {
     private final CompetitionRepository repository;
 
-    CompetitionEntityToCompetitionDomainConverter converter;
+    private final CompetitionEntityToCompetitionDomainConverter converter;
 
     @Override
     @Transactional

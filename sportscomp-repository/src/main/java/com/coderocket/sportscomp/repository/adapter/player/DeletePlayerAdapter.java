@@ -21,7 +21,6 @@ public class DeletePlayerAdapter implements DeletePlayerPort {
     public void delete(Player player) {
         var entity = playerDomainToPlayerEntityConverter.convert(player);
 
-        competitionPlayerRepository.deleteAllByPlayerEntityId(player.getId());
         playerRepository.delete(entity);
     }
 }

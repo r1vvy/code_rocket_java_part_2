@@ -22,4 +22,5 @@ public class PlayerEntity {
     String lastName;
     @Column(name = "rating")
     Integer rating;
+
 }

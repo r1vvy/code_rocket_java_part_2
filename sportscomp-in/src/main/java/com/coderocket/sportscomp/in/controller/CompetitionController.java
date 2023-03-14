@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping("competitions")
+@RequestMapping("api/competitions")
 public class CompetitionController {
     private final SaveCompetitionUseCase saveCompetitionUseCase;
     private final GetCompetitionUseCase getCompetitionUseCase;
@@ -49,6 +49,8 @@ public class CompetitionController {
 
     @PostMapping("/")
     public ResponseEntity<CreateCompetitionInResponse> create(@RequestBody CreateCompetitionInRequest request) {
+        log.debug("Recieved create competition request: {}", request);
+
         var competition = createCompetitionInRequestToDomainConverter.convert(request);
         var createdCompetition = saveCompetitionUseCase.saveCompetition(competition);
         var responseBody = createCompetitionInResponseConverter.convert(createdCompetition);
@@ -66,13 +68,16 @@ public class CompetitionController {
     @PutMapping("/{competitionId}/players")
     @ResponseStatus(HttpStatus.CREATED)
     public void addPlayerToCompetition(@PathVariable Integer competitionId, @RequestBody AddPlayerToCompetitionRequest request) {
-        var player = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
+        log.debug("Recieved add player to competition by competition id request: {}, {}", competitionId, request);
 
+        var player = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
         addPlayerToCompetitionUseCase.addPlayerToCompetitionByCompetitionId(player, competitionId);
     }
 
     @GetMapping("/{id}")
     public GetCompetitionInResponse findCompetitionById(@PathVariable Integer id) {
+        log.debug("Recieved find competition by competition id request: {}", id);
+
         var competition = getCompetitionUseCase.getCompetitionById(id);
 
         return competitionToGetInResponseConverter.convert(competition);
@@ -81,6 +86,7 @@ public class CompetitionController {
 
     @GetMapping("/{id}/players")
     public List<GetPlayerInResponse> getAllPlayersInCompetition(@PathVariable Integer id) {
+        log.debug("Recieved get all players in competition by competition id request: {}", id);
 
         return getAllPlayersInCompetitionUseCase.getAllPlayersInCompetitionByCompetitionId(id)
                 .stream()
@@ -90,6 +96,8 @@ public class CompetitionController {
 
     @GetMapping("/")
     public List<GetCompetitionInResponse> getAllCompetitions() {
+        log.debug("Recieved get all competitions request");
+
         return getAllCompetitionsUseCase.getAllCompetitions()
                 .stream()
                 .map(competitionToGetInResponseConverter::convert)
@@ -98,15 +106,19 @@ public class CompetitionController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdateCompetitionInResponse> update(@RequestBody UpdateCompetitionInRequest request, @PathVariable Integer id) {
-           var competition = updateCompetitionInRequestToDomainConverter.convert(request);
-           var updatedCompetition = updateCompetitionUseCase.update(competition, id);
-           var responseBody = competitionToUpdateCompetitionInResponseConverter.convert(updatedCompetition);
+        log.debug("Recieved update competition by competition id request: {}, {}", id, request);
 
-           return ResponseEntity.ok().body(responseBody);
+        var competition = updateCompetitionInRequestToDomainConverter.convert(request);
+        var updatedCompetition = updateCompetitionUseCase.update(competition, id);
+        var responseBody = competitionToUpdateCompetitionInResponseConverter.convert(updatedCompetition);
+
+        return ResponseEntity.ok().body(responseBody);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<DeleteCompetitionInResponse> deletePlayerById(@PathVariable Integer id) {
+    public ResponseEntity<DeleteCompetitionInResponse> deleteCompetitionById(@PathVariable Integer id) {
+        log.debug("Recieved delete competition by id request: {}", id);
+
         deleteCompetitionUseCase.deleteCompetitionById(id);
 
         return ResponseEntity.noContent().build();

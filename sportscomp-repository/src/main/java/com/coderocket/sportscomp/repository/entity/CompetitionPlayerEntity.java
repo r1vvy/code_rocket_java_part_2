@@ -14,12 +14,9 @@ public class CompetitionPlayerEntity {
     @EmbeddedId
     CompetitionPlayerKey id;
 
-    @ManyToOne
-    @MapsId("playerEntityId")
-    PlayerEntity playerEntity;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @MapsId("competitionEntityId")
+    @JoinColumn(name = "competition_id")
     CompetitionEntity competitionEntity;
 
     @Column(name = "rating_change")

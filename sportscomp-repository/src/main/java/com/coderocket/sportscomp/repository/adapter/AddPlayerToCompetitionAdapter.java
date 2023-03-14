@@ -16,27 +16,21 @@ import org.springframework.stereotype.Component;
 @Component
 @AllArgsConstructor
 public class AddPlayerToCompetitionAdapter implements AddPlayerToCompetitionPort {
-    CompetitionPlayerRepository competitionPlayerRepository;
-    CompetitionRepository competitionRepository;
+    private final CompetitionPlayerRepository competitionPlayerRepository;
+    private final CompetitionRepository competitionRepository;
     PlayerDomainToPlayerEntityConverter playerDomainToPlayerEntityConverter;
 
     @Override
     @Transactional
     public void addPlayerToCompetition(Player player, Integer competitionId) {
-        // Find the competition entity by its ID
         CompetitionEntity competitionEntity = competitionRepository
                 .findById(competitionId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid competition ID"));
 
-        var playerEntity = playerDomainToPlayerEntityConverter.convert(player);
-
-        CompetitionPlayerKey competitionPlayerKey = new CompetitionPlayerKey();
-        competitionPlayerKey.setCompetitionEntityId(competitionId);
-        competitionPlayerKey.setPlayerEntityId(playerEntity.getId());
+        CompetitionPlayerKey competitionPlayerKey = new CompetitionPlayerKey(player.getId(), competitionId);
 
         CompetitionPlayerEntity competitionPlayerEntity = new CompetitionPlayerEntity(competitionPlayerKey, 0, 0);
         competitionPlayerEntity.setCompetitionEntity(competitionEntity);
-        competitionPlayerEntity.setPlayerEntity(playerEntity);
 
         competitionPlayerRepository.save(competitionPlayerEntity);
     }

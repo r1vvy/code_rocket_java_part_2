@@ -8,6 +8,7 @@ import com.coderocket.sportscomp.in.dto.response.player.CreatePlayerInResponse;
 import com.coderocket.sportscomp.in.dto.response.player.GetPlayerInResponse;
 import com.coderocket.sportscomp.in.dto.response.player.UpdatePlayerInResponse;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping("players")
+@RequestMapping("api/players")
 public class PlayerController {
     private final SavePlayerUseCase savePlayerUseCase;
     private final GetPlayerUseCase getPlayerUseCase;
@@ -35,7 +37,9 @@ public class PlayerController {
     private final PlayerToUpdatePlayerInResponseConverter playerToUpdatePlayerInResponseConverter;
 
     @PostMapping("/")
-    public ResponseEntity<CreatePlayerInResponse>  create(@RequestBody CreatePlayerInRequest request) {
+    public ResponseEntity<CreatePlayerInResponse> create(@RequestBody CreatePlayerInRequest request) {
+        log.debug("Recieved create player request: {}", request);
+
         var player = createPlayerInRequestToDomainConverter.convert(request);
         var createdPlayer = savePlayerUseCase.savePlayer(player);
 
@@ -53,6 +57,8 @@ public class PlayerController {
 
     @GetMapping("/{id}")
     public GetPlayerInResponse findPlayerById(@PathVariable Integer id) {
+        log.debug("Recieved find player by player id request: {}", id);
+
         var player = getPlayerUseCase.getPlayer(id);
 
         return playerToGetPlayerInResponseConverter.convert(player);
@@ -60,6 +66,8 @@ public class PlayerController {
 
     @GetMapping("/")
     public List<GetPlayerInResponse> getAllPlayers() {
+        log.debug("Recieved get all players request");
+
         return getAllPlayersUseCase.getAllPlayers()
                 .stream()
                 .map(playerToGetPlayerInResponseConverter::convert)
@@ -68,6 +76,8 @@ public class PlayerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UpdatePlayerInResponse> update(@RequestBody UpdatePlayerInRequest request, @PathVariable Integer id) {
+        log.debug("Recieved update player by player id request: {}, {}", id, request);
+
         var player = updatePlayerInRequestToDomainConverter.convert(request);
         var updatedPlayer = updatePlayerUseCase.updatePlayer(player, id);
         var responseBody = playerToUpdatePlayerInResponseConverter.convert(updatedPlayer);
@@ -78,6 +88,8 @@ public class PlayerController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePlayerById(@PathVariable Integer id) {
+        log.debug("Recieved delete player by player id request: {}", id);
+
         deletePlayerUseCase.deletePlayerById(id);
     }
 }
