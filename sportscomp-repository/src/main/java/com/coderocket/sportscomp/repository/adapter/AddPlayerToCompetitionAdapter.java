@@ -29,8 +29,12 @@ public class AddPlayerToCompetitionAdapter implements AddPlayerToCompetitionPort
 
         CompetitionPlayerKey competitionPlayerKey = new CompetitionPlayerKey(player.getId(), competitionId);
 
-        CompetitionPlayerEntity competitionPlayerEntity = new CompetitionPlayerEntity(competitionPlayerKey, 0, 0);
-        competitionPlayerEntity.setCompetitionEntity(competitionEntity);
+        var competitionPlayerEntity = CompetitionPlayerEntity.builder()
+                .id(competitionPlayerKey)
+                .placement(0)
+                .ratingChange(0)
+                .competitionEntity(competitionEntity)
+                .build();
 
         competitionPlayerRepository.save(competitionPlayerEntity);
     }

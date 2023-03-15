@@ -1,15 +1,17 @@
 package com.coderocket.sportscomp.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
 @Entity
 @Table(name = "competitions_players")
-@Getter
-@Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class CompetitionPlayerEntity {
     @EmbeddedId
     CompetitionPlayerKey id;
@@ -24,10 +26,4 @@ public class CompetitionPlayerEntity {
 
     @Column(name = "placement")
     Integer placement;
-
-    public CompetitionPlayerEntity(CompetitionPlayerKey id, Integer ratingChange, Integer placement) {
-        this.id = id;
-        this.ratingChange = ratingChange;
-        this.placement = placement;
-    }
 }

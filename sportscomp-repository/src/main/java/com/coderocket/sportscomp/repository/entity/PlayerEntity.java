@@ -16,9 +16,9 @@ public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     String firstName;
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     String lastName;
     @Column(name = "rating")
     Integer rating;

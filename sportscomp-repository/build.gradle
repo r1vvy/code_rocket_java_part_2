@@ -14,15 +14,13 @@ dependencies {
 
     //implementation 'org.hibernate:hibernate-core:6.1.7.Final'
     implementation 'org.springframework:spring-orm:6.0.5'
-    // https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
-    implementation 'org.springframework.data:spring-data-jpa:3.0.3'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.4'
     // https://mvnrepository.com/artifact/jakarta.transaction/jakarta.transaction-api
     implementation 'jakarta.transaction:jakarta.transaction-api:2.0.1'
 
-
     implementation 'com.h2database:h2:2.1.214'
+    implementation 'org.liquibase:liquibase-core:4.19.1'
 
     implementation project(':sportscomp-domain')
     implementation project(':sportscomp-core')
