@@ -1,13 +1,12 @@
 package com.coderocket.sportscomp.repository.adapter;
 
 import com.coderocket.sportscomp.core.ports.out.AddPlayerToCompetitionPort;
-import com.coderocket.sportscomp.domain.Player;
-import com.coderocket.sportscomp.repository.converter.PlayerDomainToPlayerEntityConverter;
-import com.coderocket.sportscomp.repository.entity.CompetitionEntity;
-import com.coderocket.sportscomp.repository.entity.CompetitionPlayerEntity;
-import com.coderocket.sportscomp.repository.entity.CompetitionPlayerKey;
+import com.coderocket.sportscomp.domain.competitionPlayer;
+import com.coderocket.sportscomp.repository.converter.CompetitionPlayerDomainToCompetitionPlayerEntityConverter;
 import com.coderocket.sportscomp.repository.repository.CompetitionPlayerRepository;
 import com.coderocket.sportscomp.repository.repository.CompetitionRepository;
+import com.coderocket.sportscomp.repository.repository.PlayerRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,23 +17,20 @@ import org.springframework.stereotype.Component;
 public class AddPlayerToCompetitionAdapter implements AddPlayerToCompetitionPort {
     private final CompetitionPlayerRepository competitionPlayerRepository;
     private final CompetitionRepository competitionRepository;
-    PlayerDomainToPlayerEntityConverter playerDomainToPlayerEntityConverter;
-
+    private final PlayerRepository playerRepository;
+    private final CompetitionPlayerDomainToCompetitionPlayerEntityConverter domainToCompetitionPlayerEntityConverter;
     @Override
     @Transactional
-    public void addPlayerToCompetition(Player player, Integer competitionId) {
-        CompetitionEntity competitionEntity = competitionRepository
+    public void addPlayerToCompetition(competitionPlayer competitionPlayer, Integer competitionId) {
+        var competitionEntity = competitionRepository
                 .findById(competitionId)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid competition ID"));
+                .orElseThrow(() -> new EntityNotFoundException("Competition not found with id = " + competitionId));
 
-        CompetitionPlayerKey competitionPlayerKey = new CompetitionPlayerKey(player.getId(), competitionId);
+        playerRepository
+                .findById(competitionPlayer.getPlayerId())
+                .orElseThrow(() -> new EntityNotFoundException("Player not found with id = " + competitionPlayer.getPlayerId()));
 
-        var competitionPlayerEntity = CompetitionPlayerEntity.builder()
-                .id(competitionPlayerKey)
-                .placement(0)
-                .ratingChange(0)
-                .competitionEntity(competitionEntity)
-                .build();
+        var competitionPlayerEntity = domainToCompetitionPlayerEntityConverter.convert(competitionPlayer, competitionEntity);
 
         competitionPlayerRepository.save(competitionPlayerEntity);
     }

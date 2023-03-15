@@ -65,13 +65,13 @@ public class CompetitionController {
                 .body(responseBody);
     }
 
-    @PutMapping("/{competitionId}/players")
+    @PostMapping("/{competitionId}/players")
     @ResponseStatus(HttpStatus.CREATED)
     public void addPlayerToCompetition(@PathVariable Integer competitionId, @RequestBody AddPlayerToCompetitionRequest request) {
         log.debug("Recieved add player to competition by competition id request: {}, {}", competitionId, request);
 
-        var player = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
-        addPlayerToCompetitionUseCase.addPlayerToCompetitionByCompetitionId(player, competitionId);
+        var competitionPlayer = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
+        addPlayerToCompetitionUseCase.addPlayerToCompetitionByCompetitionId(competitionPlayer, competitionId);
     }
 
     @GetMapping("/{id}")

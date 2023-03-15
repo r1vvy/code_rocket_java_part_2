@@ -1,8 +1,8 @@
 package com.coderocket.sportscomp.core.ports.out;
 
-import com.coderocket.sportscomp.domain.Player;
+import com.coderocket.sportscomp.domain.competitionPlayer;
 
 public interface AddPlayerToCompetitionPort {
 
-    void addPlayerToCompetition(Player player, Integer competitionId);
+    void addPlayerToCompetition(competitionPlayer competitionPlayer, Integer competitionId);
 }
