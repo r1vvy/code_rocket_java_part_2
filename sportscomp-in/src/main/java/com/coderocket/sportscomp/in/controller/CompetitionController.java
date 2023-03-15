@@ -3,6 +3,7 @@ package com.coderocket.sportscomp.in.controller;
 import com.coderocket.sportscomp.core.ports.in.AddPlayerToCompetitionUseCase;
 import com.coderocket.sportscomp.core.ports.in.GetAllPlayersInCompetitionUseCase;
 import com.coderocket.sportscomp.core.ports.in.competition.*;
+import com.coderocket.sportscomp.domain.PlayerInCompetition;
 import com.coderocket.sportscomp.in.converter.*;
 import com.coderocket.sportscomp.in.dto.request.AddPlayerToCompetitionRequest;
 import com.coderocket.sportscomp.in.dto.request.competition.CreateCompetitionInRequest;
@@ -11,7 +12,6 @@ import com.coderocket.sportscomp.in.dto.response.competition.CreateCompetitionIn
 import com.coderocket.sportscomp.in.dto.response.competition.DeleteCompetitionInResponse;
 import com.coderocket.sportscomp.in.dto.response.competition.GetCompetitionInResponse;
 import com.coderocket.sportscomp.in.dto.response.competition.UpdateCompetitionInResponse;
-import com.coderocket.sportscomp.in.dto.response.player.GetPlayerInResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -67,11 +67,13 @@ public class CompetitionController {
 
     @PostMapping("/{competitionId}/players")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addPlayerToCompetition(@PathVariable Integer competitionId, @RequestBody AddPlayerToCompetitionRequest request) {
+    public PlayerInCompetition addPlayerToCompetition(@PathVariable Integer competitionId, @RequestBody AddPlayerToCompetitionRequest request) {
         log.debug("Recieved add player to competition by competition id request: {}, {}", competitionId, request);
 
         var competitionPlayer = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
-        addPlayerToCompetitionUseCase.addPlayerToCompetitionByCompetitionId(competitionPlayer, competitionId);
+        var addedPlayer = addPlayerToCompetitionUseCase.addPlayerToCompetitionByCompetitionId(competitionPlayer, competitionId);
+
+        return addedPlayer;
     }
 
     @GetMapping("/{id}")
@@ -85,13 +87,10 @@ public class CompetitionController {
 
 
     @GetMapping("/{id}/players")
-    public List<GetPlayerInResponse> getAllPlayersInCompetition(@PathVariable Integer id) {
+    public List<PlayerInCompetition> getAllPlayersInCompetition(@PathVariable Integer id) {
         log.debug("Recieved get all players in competition by competition id request: {}", id);
 
-        return getAllPlayersInCompetitionUseCase.getAllPlayersInCompetitionByCompetitionId(id)
-                .stream()
-                .map(playerToGetPlayerInResponseConverter::convert)
-                .collect(Collectors.toList());
+        return getAllPlayersInCompetitionUseCase.getAllPlayersInCompetitionByCompetitionId(id);
     }
 
     @GetMapping("/")

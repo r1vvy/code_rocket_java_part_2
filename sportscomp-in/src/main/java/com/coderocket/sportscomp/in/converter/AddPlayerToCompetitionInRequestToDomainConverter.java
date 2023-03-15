@@ -11,6 +11,7 @@ public class AddPlayerToCompetitionInRequestToDomainConverter {
         return competitionPlayer.builder()
                 .playerId(request.playerId())
                 .ratingChange(request.ratingChange())
+                .placement(request.placement())
                 .build();
     }
 }
