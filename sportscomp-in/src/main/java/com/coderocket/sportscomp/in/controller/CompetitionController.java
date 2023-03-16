@@ -1,5 +1,6 @@
 package com.coderocket.sportscomp.in.controller;
 
+import com.coderocket.sportscomp.core.ports.in.GetPlayerFromCompetitionUseCase;
 import com.coderocket.sportscomp.core.ports.in.AddPlayerToCompetitionUseCase;
 import com.coderocket.sportscomp.core.ports.in.GetAllPlayersInCompetitionUseCase;
 import com.coderocket.sportscomp.core.ports.in.competition.*;
@@ -31,6 +32,7 @@ class CompetitionController {
     private final SaveCompetitionUseCase saveCompetitionUseCase;
     private final GetCompetitionUseCase getCompetitionUseCase;
     private final GetAllCompetitionsUseCase getAllCompetitionsUseCase;
+    private final GetPlayerFromCompetitionUseCase getPlayerFromCompetitionUseCase;
     private final GetAllPlayersInCompetitionUseCase getAllPlayersInCompetitionUseCase;
     private final UpdateCompetitionUseCase updateCompetitionUseCase;
     private final DeleteCompetitionUseCase deleteCompetitionUseCase;
@@ -68,13 +70,29 @@ class CompetitionController {
 
     @PostMapping("/{competitionId}/players")
     @ResponseStatus(HttpStatus.CREATED)
-    public PlayerInCompetition addPlayerToCompetition(@PathVariable Integer competitionId, @Valid @RequestBody AddPlayerToCompetitionRequest request) {
+    public ResponseEntity<PlayerInCompetition> addPlayerToCompetition(@PathVariable Integer competitionId, @Valid @RequestBody AddPlayerToCompetitionRequest request) {
         log.debug("Recieved add player to competition by competition id request: {}, {}", competitionId, request);
 
         var competitionPlayer = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
         var addedPlayer = addPlayerToCompetitionUseCase.addPlayerToCompetitionByCompetitionId(competitionPlayer, competitionId);
 
-        return addedPlayer;
+        var location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(addedPlayer.player().getId())
+                .toUri();
+
+        return ResponseEntity.created(location)
+                .body(addedPlayer);
+    }
+
+    @GetMapping("/{competitionId}/players/{playerId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<PlayerInCompetition> getPlayerByIdFromCompetitionByCompetitionId(@PathVariable Integer playerId, @PathVariable Integer competitionId) {
+        log.debug("Recieved find player by player id from competition by competition id: {}", playerId, competitionId);
+        var responseBody = getPlayerFromCompetitionUseCase.getPlayerByIdFromCompetitionById(playerId, competitionId);
+
+        return ResponseEntity.ok().body(responseBody);
     }
 
     @GetMapping("/{id}")
