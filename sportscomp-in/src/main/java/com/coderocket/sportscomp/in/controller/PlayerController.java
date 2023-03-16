@@ -1,5 +1,6 @@
 package com.coderocket.sportscomp.in.controller;
 
+import com.coderocket.sportscomp.core.exceptions.NoEntityFoundException;
 import com.coderocket.sportscomp.core.ports.in.player.*;
 import com.coderocket.sportscomp.in.converter.*;
 import com.coderocket.sportscomp.in.dto.request.player.CreatePlayerInRequest;
@@ -7,11 +8,13 @@ import com.coderocket.sportscomp.in.dto.request.player.UpdatePlayerInRequest;
 import com.coderocket.sportscomp.in.dto.response.player.CreatePlayerInResponse;
 import com.coderocket.sportscomp.in.dto.response.player.GetPlayerInResponse;
 import com.coderocket.sportscomp.in.dto.response.player.UpdatePlayerInResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -21,7 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/players")
-public class PlayerController {
+class PlayerController {
     private final SavePlayerUseCase savePlayerUseCase;
     private final GetPlayerUseCase getPlayerUseCase;
     private final UpdatePlayerUseCase updatePlayerUseCase;
@@ -36,8 +39,8 @@ public class PlayerController {
     private final PlayerToGetPlayerInResponseConverter playerToGetPlayerInResponseConverter;
     private final PlayerToUpdatePlayerInResponseConverter playerToUpdatePlayerInResponseConverter;
 
-    @PostMapping("/")
-    public ResponseEntity<CreatePlayerInResponse> create(@RequestBody CreatePlayerInRequest request) {
+    @PostMapping("")
+    public ResponseEntity<CreatePlayerInResponse> create(@Valid @RequestBody CreatePlayerInRequest request) {
         log.debug("Recieved create player request: {}", request);
 
         var player = createPlayerInRequestToDomainConverter.convert(request);
@@ -59,9 +62,13 @@ public class PlayerController {
     public GetPlayerInResponse findPlayerById(@PathVariable Integer id) {
         log.debug("Recieved find player by player id request: {}", id);
 
-        var player = getPlayerUseCase.getPlayer(id);
+        try {
+            var player = getPlayerUseCase.getPlayer(id);
+            return playerToGetPlayerInResponseConverter.convert(player);
 
-        return playerToGetPlayerInResponseConverter.convert(player);
+        } catch (NoEntityFoundException exc) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No player found with id = " + id, exc);
+        }
     }
 
     @GetMapping("/")
@@ -75,7 +82,7 @@ public class PlayerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdatePlayerInResponse> update(@RequestBody UpdatePlayerInRequest request, @PathVariable Integer id) {
+    public ResponseEntity<UpdatePlayerInResponse> update(@Valid @RequestBody UpdatePlayerInRequest request, @PathVariable Integer id) {
         log.debug("Recieved update player by player id request: {}, {}", id, request);
 
         var player = updatePlayerInRequestToDomainConverter.convert(request);

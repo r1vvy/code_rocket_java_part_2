@@ -22,6 +22,9 @@ public class AddPlayerToCompetitionAdapter implements AddPlayerToCompetitionPort
     private final PlayerRepository playerRepository;
     private final CompetitionPlayerDomainToCompetitionPlayerEntityConverter domainToCompetitionPlayerEntityConverter;
     private final PlayerEntityAndCompetitionPlayerEntityToPlayerInCompetitionDomainConverter playerEntityAndCompetitionPlayerEntityToPlayerInCompetitionDomainConverter;
+
+
+    // TODO: Move find logic to the core logic.
     @Override
     @Transactional
     public PlayerInCompetition addPlayerToCompetition(competitionPlayer competitionPlayer, Integer competitionId) {

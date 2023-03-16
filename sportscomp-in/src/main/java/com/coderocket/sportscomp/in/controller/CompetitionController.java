@@ -12,6 +12,7 @@ import com.coderocket.sportscomp.in.dto.response.competition.CreateCompetitionIn
 import com.coderocket.sportscomp.in.dto.response.competition.DeleteCompetitionInResponse;
 import com.coderocket.sportscomp.in.dto.response.competition.GetCompetitionInResponse;
 import com.coderocket.sportscomp.in.dto.response.competition.UpdateCompetitionInResponse;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/competitions")
-public class CompetitionController {
+class CompetitionController {
     private final SaveCompetitionUseCase saveCompetitionUseCase;
     private final GetCompetitionUseCase getCompetitionUseCase;
     private final GetAllCompetitionsUseCase getAllCompetitionsUseCase;
@@ -47,8 +48,8 @@ public class CompetitionController {
     private final CompetitionToUpdateCompetitionInResponseConverter competitionToUpdateCompetitionInResponseConverter;
     private final PlayerToGetPlayerInResponseConverter playerToGetPlayerInResponseConverter;
 
-    @PostMapping("/")
-    public ResponseEntity<CreateCompetitionInResponse> create(@RequestBody CreateCompetitionInRequest request) {
+    @PostMapping("")
+    public ResponseEntity<CreateCompetitionInResponse> create(@RequestBody @Valid CreateCompetitionInRequest request) {
         log.debug("Recieved create competition request: {}", request);
 
         var competition = createCompetitionInRequestToDomainConverter.convert(request);
@@ -67,7 +68,7 @@ public class CompetitionController {
 
     @PostMapping("/{competitionId}/players")
     @ResponseStatus(HttpStatus.CREATED)
-    public PlayerInCompetition addPlayerToCompetition(@PathVariable Integer competitionId, @RequestBody AddPlayerToCompetitionRequest request) {
+    public PlayerInCompetition addPlayerToCompetition(@PathVariable Integer competitionId, @Valid @RequestBody AddPlayerToCompetitionRequest request) {
         log.debug("Recieved add player to competition by competition id request: {}, {}", competitionId, request);
 
         var competitionPlayer = addPlayerToCompetitionInRequestToDomainConverter.convert(request);
@@ -90,6 +91,7 @@ public class CompetitionController {
     public List<PlayerInCompetition> getAllPlayersInCompetition(@PathVariable Integer id) {
         log.debug("Recieved get all players in competition by competition id request: {}", id);
 
+
         return getAllPlayersInCompetitionUseCase.getAllPlayersInCompetitionByCompetitionId(id);
     }
 
@@ -104,7 +106,7 @@ public class CompetitionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UpdateCompetitionInResponse> update(@RequestBody UpdateCompetitionInRequest request, @PathVariable Integer id) {
+    public ResponseEntity<UpdateCompetitionInResponse> update(@Valid @RequestBody UpdateCompetitionInRequest request, @PathVariable Integer id) {
         log.debug("Recieved update competition by competition id request: {}, {}", id, request);
 
         var competition = updateCompetitionInRequestToDomainConverter.convert(request);

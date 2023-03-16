@@ -6,16 +6,16 @@ import jakarta.validation.constraints.Pattern;
 
 public record CreateCompetitionInRequest(
 
-        @NotBlank
+        @NotBlank(message = "title must not be blank")
         String title,
-        @NotNull
+        @NotNull(message = "capacity must not be null")
         Integer capacity,
-        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "date should be YYYY-MM-DD pattern")
         String registrationOpen,
-        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "date should be YYYY-MM-DD pattern")
         String registrationClose,
-        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "date should be YYYY-MM-DD pattern")
         String startDate,
-        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "date should be YYYY-MM-DD pattern")
         String endDate
 ) { }

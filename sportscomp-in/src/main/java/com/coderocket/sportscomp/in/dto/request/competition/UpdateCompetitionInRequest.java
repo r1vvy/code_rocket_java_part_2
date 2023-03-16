@@ -6,9 +6,9 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public record UpdateCompetitionInRequest(
-        @NotBlank
+        @NotBlank(message = "title must not be blank")
         String title,
-        @NotNull
+        @NotNull(message = "capacity must not be null")
         Integer capacity,
         LocalDate registrationOpen,
         LocalDate registrationClose,
