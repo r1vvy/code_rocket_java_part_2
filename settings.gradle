@@ -10,4 +10,5 @@ include 'sportscomp-domain'
 include 'sportscomp-in'
 include 'sportscomp-utils'
 include 'sportscomp-config'
+include 'sportscomp-out'
 

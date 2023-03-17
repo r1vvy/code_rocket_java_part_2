@@ -2,7 +2,7 @@ package com.coderocket.sportscomp.repository.adapter;
 
 import com.coderocket.sportscomp.core.ports.out.AddPlayerToCompetitionPort;
 import com.coderocket.sportscomp.domain.PlayerInCompetition;
-import com.coderocket.sportscomp.domain.competitionPlayer;
+import com.coderocket.sportscomp.domain.CompetitionPlayer;
 import com.coderocket.sportscomp.repository.converter.CompetitionPlayerDomainToCompetitionPlayerEntityConverter;
 import com.coderocket.sportscomp.repository.converter.PlayerEntityAndCompetitionPlayerEntityToPlayerInCompetitionDomainConverter;
 import com.coderocket.sportscomp.repository.repository.CompetitionPlayerRepository;
@@ -27,7 +27,7 @@ public class AddPlayerToCompetitionAdapter implements AddPlayerToCompetitionPort
     // TODO: Move find logic to the core logic.
     @Override
     @Transactional
-    public PlayerInCompetition addPlayerToCompetition(competitionPlayer competitionPlayer, Integer competitionId) {
+    public PlayerInCompetition addPlayerToCompetition(CompetitionPlayer competitionPlayer, Integer competitionId) {
 
         var competitionEntity = competitionRepository
                 .findById(competitionId)

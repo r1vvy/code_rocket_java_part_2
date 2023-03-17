@@ -5,7 +5,7 @@ import lombok.Value;
 
 @Value
 @Builder
-public class competitionPlayer {
+public class CompetitionPlayer {
     Integer playerId;
     Integer ratingChange;
     Integer placement;

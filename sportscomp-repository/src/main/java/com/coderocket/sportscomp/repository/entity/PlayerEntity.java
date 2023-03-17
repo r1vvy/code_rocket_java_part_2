@@ -23,4 +23,8 @@ public class PlayerEntity {
     @Column(name = "rating")
     Integer rating;
 
+    @OneToOne
+    @JoinColumn(name = "joke_id", referencedColumnName = "id")
+    ChuckNorrisJokeEntity chuckNorrisJokeEntity;
+
 }
