@@ -23,7 +23,7 @@ public class PlayerEntity {
     @Column(name = "rating")
     Integer rating;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "joke_id", referencedColumnName = "id")
     ChuckNorrisJokeEntity chuckNorrisJokeEntity;
 

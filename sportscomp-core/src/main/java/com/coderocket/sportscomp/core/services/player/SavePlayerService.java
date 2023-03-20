@@ -21,8 +21,8 @@ public class SavePlayerService implements SavePlayerUseCase {
     public Player savePlayer(Player player) {
         var generatedChuckNorrisJoke = generateRandomChuckNorrisJokePort.generate();
         log.debug("Chuck Norris generated a new joke: {}", generatedChuckNorrisJoke);
-
         var savedChuckNorrisJoke = saveChuckNorrisJokePort.save(generatedChuckNorrisJoke);
+
         var playerWithChuckNorrisJoke = player.toBuilder()
                 .chuckNorrisJoke(savedChuckNorrisJoke)
                 .build();
