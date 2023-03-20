@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PlayerEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "first_name")
     String firstName;
@@ -22,9 +22,7 @@ public class PlayerEntity {
     String lastName;
     @Column(name = "rating")
     Integer rating;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "joke_id", referencedColumnName = "id")
     ChuckNorrisJokeEntity chuckNorrisJokeEntity;
-
 }

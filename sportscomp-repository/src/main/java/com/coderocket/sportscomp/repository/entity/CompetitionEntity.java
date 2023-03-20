@@ -18,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class CompetitionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(name = "title")
     String title;

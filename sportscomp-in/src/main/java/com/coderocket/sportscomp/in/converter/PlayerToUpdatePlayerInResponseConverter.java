@@ -12,8 +12,7 @@ public class PlayerToUpdatePlayerInResponseConverter {
                 player.getId(),
                 player.getFirstName(),
                 player.getLastName(),
-                player.getRating(),
-                player.getChuckNorrisJoke()
+                player.getRating()
         );
     }
 }

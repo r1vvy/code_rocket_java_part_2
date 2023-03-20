@@ -6,8 +6,10 @@ import com.coderocket.sportscomp.repository.converter.PlayerDomainToPlayerEntity
 import com.coderocket.sportscomp.repository.converter.PlayerEntityToPlayerDomainConverter;
 import com.coderocket.sportscomp.repository.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @AllArgsConstructor
 public class SavePlayerAdapter implements SavePlayerPort {
@@ -18,7 +20,9 @@ public class SavePlayerAdapter implements SavePlayerPort {
     @Override
     public Player save(Player player) {
         var entity = playerDomainToPlayerEntityConverter.convert(player);
-        var savedPlayer = repository.save(entity);
+        var savedPlayer = repository.saveAndFlush(entity);
+
+        log.debug("Player: {} saved successfully", savedPlayer);
 
         return playerEntityToPlayerDomainConverter.convert(savedPlayer);
     }

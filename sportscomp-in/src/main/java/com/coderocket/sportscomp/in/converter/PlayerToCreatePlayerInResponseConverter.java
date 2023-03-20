@@ -13,7 +13,8 @@ public class PlayerToCreatePlayerInResponseConverter {
                 player.getId(),
                 player.getFirstName(),
                 player.getLastName(),
-                player.getRating()
+                player.getRating(),
+                player.getChuckNorrisJoke()
         );
     }
 }

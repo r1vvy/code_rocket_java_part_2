@@ -9,6 +9,7 @@ public class ChuckNorrisJokeDomainToEntityConverter {
 
     public ChuckNorrisJokeEntity convert(ChuckNorrisJoke chuckNorrisJoke) {
         return ChuckNorrisJokeEntity.builder()
+                .id(chuckNorrisJoke.id())
                 .url(chuckNorrisJoke.url())
                 .content(chuckNorrisJoke.content())
                 .build();

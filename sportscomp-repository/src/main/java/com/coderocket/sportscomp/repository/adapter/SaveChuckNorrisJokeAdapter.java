@@ -5,7 +5,6 @@ import com.coderocket.sportscomp.domain.ChuckNorrisJoke;
 import com.coderocket.sportscomp.repository.converter.ChuckNorrisJokeDomainToEntityConverter;
 import com.coderocket.sportscomp.repository.converter.ChuckNorrisJokeEntityToDomainConverter;
 import com.coderocket.sportscomp.repository.repository.ChuckNorrisJokeRepository;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -19,10 +18,9 @@ public class SaveChuckNorrisJokeAdapter implements SaveChuckNorrisJokePort {
     private final ChuckNorrisJokeEntityToDomainConverter chuckNorrisJokeEntityToDomainConverter;
 
     @Override
-    @Transactional
     public ChuckNorrisJoke save(ChuckNorrisJoke chuckNorrisJoke) {
         var entity = chuckNorrisJokeDomainToEntityConverter.convert(chuckNorrisJoke);
-        var savedChuckNorrisJoke = chuckNorrisJokeRepository.save(entity);
+        var savedChuckNorrisJoke = chuckNorrisJokeRepository.saveAndFlush(entity);
 
         log.debug("Chuck Norris saved his joke in our app: {}", savedChuckNorrisJoke);
 

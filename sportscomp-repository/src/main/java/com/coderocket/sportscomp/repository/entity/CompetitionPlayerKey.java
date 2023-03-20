@@ -14,5 +14,4 @@ import java.io.Serializable;
 public class CompetitionPlayerKey implements Serializable {
     Integer playerEntityId;
     Integer competitionEntityId;
-
 }

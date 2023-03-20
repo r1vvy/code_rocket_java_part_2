@@ -27,7 +27,6 @@ public class SavePlayerService implements SavePlayerUseCase {
                 .chuckNorrisJoke(savedChuckNorrisJoke)
                 .build();
 
-
         return savePlayerPort.save(playerWithChuckNorrisJoke);
     }
 }
